@@ -1,30 +1,70 @@
 ﻿using System.Data.Entity;
 using OrderingFood.DataModels;
+using OrderingFood.Data;
 
 namespace OrderingFood.DataAccess
 {
-    public class OrderingContext:DbContext
+    public class OrderingContext:DbContext,IOrderingContext
     {
 
         public OrderingContext():base("Name=DefaultConnection")
         {
         }
 
-        public DbSet<Administrator> Administrators { get; set; }
-        public DbSet<Restaurant> Restaurants { get; set; }
-        public DbSet<Meal> Meals { get; set; }
-        public DbSet<Order> Orders { get; set; }
+
+        static OrderingContext()
+        {
+            Database.SetInitializer<OrderingContext>(null);
+
+        }
+
+
+
+        public virtual DbSet<Administrator> Administrators { get; set; }
+        public virtual DbSet<Restaurant> Restaurants { get; set; }
+        public virtual DbSet<Meal> Meals { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Restaurant>().ToTable("Restaurant");
+
+            modelBuilder.Entity<Restaurant>().HasKey(r => r.ID);
+            modelBuilder.Entity<Restaurant>().Property(r => r.ID).HasColumnName("ID");
+            modelBuilder.Entity<Restaurant>().Property(r => r.RestaurantName).HasColumnName("RestaurantName");
+            modelBuilder.Entity<Restaurant>().Property(r => r.Address).HasColumnName("Address");
+            modelBuilder.Entity<Restaurant>().HasMany(r => r.Administrators).WithRequired(a => a.Restaurant).HasForeignKey(a => a.Restaurant_ID);
+            modelBuilder.Entity<Restaurant>().HasMany(r => r.Meals).WithRequired(m => m.Restaurant).HasForeignKey(m => m.Restaurant_ID);
+
+
+            modelBuilder.Entity<Order>().ToTable("Order");
+
+            modelBuilder.Entity<Order>().HasKey(o => o.ID);
+            modelBuilder.Entity<Order>().Property(o => o.ID).HasColumnName("ID");
+            modelBuilder.Entity<Order>().Property(o => o.Amount).HasColumnName("Amount");
+            modelBuilder.Entity<Order>().Property(o => o.Date).HasColumnName("Date");
+            modelBuilder.Entity<Order>().Property(o => o.Delivery).HasColumnName("Delivery");
+            modelBuilder.Entity<Order>().HasMany(o => o.Meal).WithRequired(m=>m.Order).HasForeignKey(m=>m.Order_ID);
+
+
+
             modelBuilder.Entity<Administrator>().ToTable("Administrator");
 
             modelBuilder.Entity<Administrator>().HasKey(a => a.ID);
             modelBuilder.Entity<Administrator>().Property(a=>a.ID).HasColumnName("ID");
             modelBuilder.Entity<Administrator>().Property(a => a.AdministratorName).HasColumnName("AdministratorName");
-            modelBuilder.Entity<Administrator>().HasMany(a=>a.Restaurant).WithRequired(r=>r.Admin).HasForeignKey(r=>r.Admin_ID);
 
-            Entity<Restaurant>()
+
+
+            modelBuilder.Entity<Meal>().ToTable("Meal");
+
+            modelBuilder.Entity<Meal>().HasKey(m=>m.ID);
+            modelBuilder.Entity<Meal>().Property(m => m.ID).HasColumnName("ID");
+            modelBuilder.Entity<Meal>().Property(m => m.MealName).HasColumnName("MealName");
+            modelBuilder.Entity<Meal>().Property(m => m.Price).HasColumnName("Price");
+
+
+
 
         }
 

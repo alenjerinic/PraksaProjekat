@@ -49,16 +49,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IOrderingContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Administrator.cs" />
+    <Compile Include="Models\Meal.cs" />
     <Compile Include="Migrations\MigrationsConfiguration.cs" />
-    <Compile Include="Models\Administrators.cs" />
-    <Compile Include="Models\Meals.cs" />
-    <Compile Include="Models\Orders.cs" />
-    <Compile Include="Models\Restaurants.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="OrderingContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\Restaurant.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
