@@ -15,10 +15,7 @@ namespace Data.Access.Migrations
         }
 
 
-        protected override void Seed(OrderingFood.DataAccess.OrderingContext context)
-        {
-            
-        }
+       
 
 
 
