@@ -12,6 +12,6 @@ namespace OrderingFood.DataModels
         public int ID { get; set; }
         public string AdministratorName { get; set; }
         public Restaurant Restaurant { get; set; }
-        public int Restaurant_ID { get; set;}        
+        public int RestaurantID { get; set;}        
     }
 }

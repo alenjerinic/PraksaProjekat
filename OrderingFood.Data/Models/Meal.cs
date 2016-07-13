@@ -11,10 +11,9 @@ namespace OrderingFood.DataModels
         public int ID { get; set; }
         public string MealName { get; set; }
         public string CategoryName { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
         public Restaurant Restaurant { get; set; }
-        public int Restaurant_ID { get; set; }
-        public Order Order { get; set; }
-        public int Order_ID { get; set; }
+        public int RestaurantID { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

@@ -33,8 +33,8 @@ namespace OrderingFood.DataAccess
             modelBuilder.Entity<Restaurant>().Property(r => r.ID).HasColumnName("ID");
             modelBuilder.Entity<Restaurant>().Property(r => r.RestaurantName).HasColumnName("RestaurantName");
             modelBuilder.Entity<Restaurant>().Property(r => r.Address).HasColumnName("Address");
-            modelBuilder.Entity<Restaurant>().HasMany(r => r.Administrators).WithRequired(a => a.Restaurant).HasForeignKey(a => a.Restaurant_ID);
-            modelBuilder.Entity<Restaurant>().HasMany(r => r.Meals).WithRequired(m => m.Restaurant).HasForeignKey(m => m.Restaurant_ID);
+            modelBuilder.Entity<Restaurant>().HasMany(r => r.Administrators).WithRequired(a => a.Restaurant).HasForeignKey(a => a.RestaurantID);
+            modelBuilder.Entity<Restaurant>().HasMany(r => r.Meals).WithRequired(m => m.Restaurant).HasForeignKey(m => m.RestaurantID);
 
 
             modelBuilder.Entity<Order>().ToTable("Order");
@@ -44,8 +44,7 @@ namespace OrderingFood.DataAccess
             modelBuilder.Entity<Order>().Property(o => o.Amount).HasColumnName("Amount");
             modelBuilder.Entity<Order>().Property(o => o.Date).HasColumnName("Date");
             modelBuilder.Entity<Order>().Property(o => o.Delivery).HasColumnName("Delivery");
-            modelBuilder.Entity<Order>().HasMany(o => o.Meal).WithRequired(m=>m.Order).HasForeignKey(m=>m.Order_ID);
-
+            modelBuilder.Entity<Order>().HasRequired(o => o.Meal).WithMany(m => m.Orders);
 
 
             modelBuilder.Entity<Administrator>().ToTable("Administrator");
@@ -53,7 +52,7 @@ namespace OrderingFood.DataAccess
             modelBuilder.Entity<Administrator>().HasKey(a => a.ID);
             modelBuilder.Entity<Administrator>().Property(a=>a.ID).HasColumnName("ID");
             modelBuilder.Entity<Administrator>().Property(a => a.AdministratorName).HasColumnName("AdministratorName");
-
+            modelBuilder.Entity<Administrator>().HasRequired(a => a.Restaurant).WithOptional();
 
 
             modelBuilder.Entity<Meal>().ToTable("Meal");
@@ -62,6 +61,7 @@ namespace OrderingFood.DataAccess
             modelBuilder.Entity<Meal>().Property(m => m.ID).HasColumnName("ID");
             modelBuilder.Entity<Meal>().Property(m => m.MealName).HasColumnName("MealName");
             modelBuilder.Entity<Meal>().Property(m => m.Price).HasColumnName("Price");
+            modelBuilder.Entity<Meal>().HasRequired(m => m.Restaurant).WithOptional();
 
 
 

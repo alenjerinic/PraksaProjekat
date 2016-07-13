@@ -10,7 +10,8 @@ namespace OrderingFood.DataModels
     {
         public int ID { get; set; }
         public int Amount { get; set; }
-        public List<Meal> Meal { get; set; }        
+        public Meal Meal { get; set; }
+        public int MealID { get; set; }
         public DateTime Date { get; set; }
         public bool Delivery { get; set; }
 

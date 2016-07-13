@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrderingFood.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,8 @@ namespace OrderingFood.Web.Controllers
     {
         public ActionResult Index()
         {
+            OrderingContext context = new OrderingContext();
+            context.Administrators.ToArray();
             return View();
         }
 
