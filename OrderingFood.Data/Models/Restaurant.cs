@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace OrderingFood.DataModels
+namespace OrderingFood.Data.Models
 {
     public class Restaurant
     {
@@ -14,5 +10,6 @@ namespace OrderingFood.DataModels
         public string Telephone { get; set; }
         public List<Meal> Meals { get; set; }
         public List<Administrator> Administrators { get; set; }
+        public bool Active { get; set; }        
     }
 }

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingFood.Web", "Orderin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingFood.Test", "OrderingFood.Test\OrderingFood.Test.csproj", "{47362AB1-9F74-4C7D-890F-DAD0D034A39C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingFood.DataAccess", "OrderingFood.DataAccess\OrderingFood.DataAccess.csproj", "{85930FB9-112C-46A3-8918-16F52D13DAD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{47362AB1-9F74-4C7D-890F-DAD0D034A39C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47362AB1-9F74-4C7D-890F-DAD0D034A39C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47362AB1-9F74-4C7D-890F-DAD0D034A39C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85930FB9-112C-46A3-8918-16F52D13DAD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85930FB9-112C-46A3-8918-16F52D13DAD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85930FB9-112C-46A3-8918-16F52D13DAD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85930FB9-112C-46A3-8918-16F52D13DAD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

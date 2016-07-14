@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace OrderingFood.DataModels
+namespace OrderingFood.Data.Models
 {
     public class Meal
     {
@@ -15,5 +11,6 @@ namespace OrderingFood.DataModels
         public Restaurant Restaurant { get; set; }
         public int RestaurantID { get; set; }
         public List<Order> Orders { get; set; }
+        public bool Active { get; set; }
     }
 }
