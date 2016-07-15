@@ -42,7 +42,7 @@ namespace OrderingFood.Data.Context
             modelBuilder.Entity<Order>().HasKey(o => o.ID);
             modelBuilder.Entity<Order>().Property(o => o.ID).HasColumnName("ID");
             modelBuilder.Entity<Order>().Property(o => o.Amount).HasColumnName("Amount");
-            modelBuilder.Entity<Order>().Property(o => o.OrderTime).HasColumnName("Date");
+            modelBuilder.Entity<Order>().Property(o => o.OrderTime).HasColumnName("OrderTime");
             modelBuilder.Entity<Order>().Property(o => o.Delivery).HasColumnName("Delivery");
             modelBuilder.Entity<Order>().HasRequired(o => o.Meal).WithMany(m => m.Orders).WillCascadeOnDelete(false);
 
@@ -63,8 +63,6 @@ namespace OrderingFood.Data.Context
             modelBuilder.Entity<Meal>().Property(m => m.Price).HasColumnName("Price");
             modelBuilder.Entity<Meal>().Property(m => m.Active).HasColumnName("Active");
             modelBuilder.Entity<Meal>().HasRequired(m => m.Restaurant).WithOptional();
-
-
 
 
         }

@@ -29,5 +29,7 @@ namespace OrderingFood.Web.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<OrderingFood.Web.Models.RestaurantModel> RestaurantModels { get; set; }
     }
 }

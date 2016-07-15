@@ -1,6 +1,6 @@
-﻿using OrderingFood.Data.Models;
+﻿using System.Collections.Generic;
 using OrderingFood.Data.Context;
-using System.Collections.Generic;
+using OrderingFood.Data.Models;
 using System.Linq;
 using System;
 
@@ -22,31 +22,21 @@ namespace OrderingFood.DataAccess.Repositories
         }
 
 
-        public void AddOrder(int id)
+        public Order AddOrder(int amaunt, DateTime time,bool delivery, Meal meal)
         {
-            var order = _context.Orders.Find(id);
-        }
-        /*
-         * public void FulfillOrder(int orderID, EmployeeRole worker)
-        {
-            if (worker==EmployeeRole.COOK)
+            var order = new Order()
             {
-                throw new ArgumentException("Specified employee can't fulfill orders", nameof(worker));
-            }
-            var order = restourantContext.Orders.Find(orderID);
-            if (order == null)
-            {
-                throw new ArgumentException("Specified order does not exist", nameof(orderID));
-            }
-            if (order.Delivered)
-            {
-                throw new ArgumentException("Order is already filfilled", nameof(order));
-            }
-            order.Delivered = true;
-            restourantContext.SaveChanges();
-        }
-         * 
-         */
+                Amount = amaunt,
+                OrderTime=time.Hour,
+                Delivery=delivery,
+                Meal=meal
+            };
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+            return order;            
+        } 
+
+
         public void DeleteOrder(int id)
         {
             var order = _context.Orders.Find(id);
@@ -63,64 +53,23 @@ namespace OrderingFood.DataAccess.Repositories
             order.Meal = null;
             _context.SaveChanges();
         }
+
+
+        public void UpdateOrder(int id, int amaunt, DateTime time, bool delivery, Meal meal)
+        {
+            var order = _context.Orders.Find(id);
+            if (order == null)
+            {
+                throw new ArgumentException("Specified order does not exist", nameof(id));
+            }
+
+            order.Amount = amaunt;
+            order.OrderTime = time.Hour;
+            order.Delivery = delivery;
+            order.Meal = meal;
+            _context.SaveChanges();
+
+        }
+
     }
 }
-
-
-
-
-
-
-
-
-
-
-/*
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- *  public void FulfillOrder(int orderID, EmployeeRole worker)
-        {
-            if (worker==EmployeeRole.COOK)
-            {
-                throw new ArgumentException("Specified employee can't fulfill orders", nameof(worker));
-            }
-            var order = restourantContext.Orders.Find(orderID);
-            if (order == null)
-            {
-                throw new ArgumentException("Specified order does not exist", nameof(orderID));
-            }
-            if (order.Delivered)
-            {
-                throw new ArgumentException("Order is already filfilled", nameof(order));
-            }
-            order.Delivered = true;
-            restourantContext.SaveChanges();
-        }
- * 
- * public void DeleteOrder(int orderID, EmployeeRole worker)
-        {
-            var order = restourantContext.Orders.Find(orderID);
-            if (order == null)
-            {
-                throw new ArgumentException("Specified order does not exist", nameof(orderID));
-            }
-            if (order.Delivered)
-            {
-                throw new InvalidOperationException("Order is fulfilled and can't be deleted");
-            }
-            order.Quantity = 0;
-            order.Delivered = true;
-            restourantContext.SaveChanges();
-
- 
-     
-     
-     
-     */
