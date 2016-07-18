@@ -12,11 +12,11 @@ namespace OrderingFood.DataAccess.Repositories
         {
         }
 
-        public List<Meal> GetMealByRestaurant(string name)
+        public List<Meal> GetMealByRestaurant(int id)
         {
             var result = (from meals in _context.Meals
                           from restaurants in _context.Restaurants
-                          where restaurants.ID == meals.RestaurantID && restaurants.RestaurantName == name
+                          where restaurants.ID == meals.RestaurantID && restaurants.ID==id
                           select meals).ToList();
             return result;
         }

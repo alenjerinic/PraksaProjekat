@@ -5,16 +5,17 @@ using System.Web.Mvc;
 using OrderingFood.Web.Models;
 using OrderingFood.DataAccess.UnitOFWork;
 using OrderingFood.Data.Context;
+using OrderingFood.Data.Models;
+using System.Web.Routing;
 
 namespace OrderingFood.Web.Controllers
-{
+{    
     public class RestaurantController : Controller
     {
-        private UnitOfWork _uow;
-
-        //private ApplicationDbContext db = new ApplicationDbContext();
+        private UnitOfWork _uow;        
 
         // GET: Restaurant
+        [Route("Restaurants")]
         public ActionResult Restaurants()
         {
             List<RestaurantModel> model = new List<RestaurantModel>();
@@ -37,20 +38,43 @@ namespace OrderingFood.Web.Controllers
             return View(model);
         }
 
-        //    // GET: Restaurant/Details/5
-        //    public ActionResult Details(int? id)
-        //    {
-        //        if (id == null)
-        //        {
-        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //        }
-        //        RestaurantModel restaurantModel = db.RestaurantModels.Find(id);
-        //        if (restaurantModel == null)
-        //        {
-        //            return HttpNotFound();
-        //        }
-        //        return View(restaurantModel);
-        //    }
+        // GET: Restaurant/Meals/1
+        [Route("Restaurant/Meals/id:int")]
+        public ActionResult Meals(int? ID)
+        {
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            List<DetailsModel> model = new List<DetailsModel>();
+
+            using (_uow = new UnitOfWork(new OrderingContext()))
+            {
+                var restaurant = _uow.RestaurantRepository.GetByID((int)ID);
+                var meal = _uow.MealRepository.GetMealByRestaurant(restaurant.ID);
+
+                foreach (var item in meal)
+                {
+                    DetailsModel detail = new DetailsModel()
+                    {
+                        ID=item.ID,
+                        MealName = item.MealName,
+                        Price = item.Price,
+                        Category = item.CategoryName
+                    };
+                    model.Add(detail);
+                }
+            }
+            return View(model);
+        }
+    }
+
+}
+
+
+
+            
+
 
         //    // GET: Restaurant/Create
         //    public ActionResult Create()
@@ -141,5 +165,4 @@ namespace OrderingFood.Web.Controllers
         //        base.Dispose(disposing);
         //    }
         //}
-    }
-}
+

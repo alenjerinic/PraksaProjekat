@@ -1,0 +1,44 @@
+﻿@model IEnumerable<OrderingFood.Web.Models.DetailsModel>
+
+@{
+    ViewBag.Title = "Meals";
+}
+
+<h2>Meals</h2>
+
+<div>
+        <table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.MealName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>                
+                <td>
+                    @Html.DisplayFor(modelItem => item.MealName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>               
+            </tr>
+        }
+        </table>
+
+    <p>
+        @Html.ActionLink("Back to Restaurants", "Restaurants")        
+    </p>
+</div>
