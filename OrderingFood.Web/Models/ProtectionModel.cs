@@ -8,10 +8,9 @@ namespace OrderingFood.Web.Models
 {
     public class ProtectionModel : AuthorizeAttribute
     {
-        public virtual void OnAuthorization(AuthorizationContext filterContext)
-        {
-                        
-        }
+        //public virtual void OnAuthorization(AuthorizationContext filterContext)
+        //{                        
+        //}
     }
 
 }

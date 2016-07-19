@@ -17,12 +17,12 @@ namespace OrderingFood.Data.Context
 
         }
 
-
-
         public virtual DbSet<Administrator> Administrators { get; set; }
         public virtual DbSet<Restaurant> Restaurants { get; set; }
         public virtual DbSet<Meal> Meals { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
