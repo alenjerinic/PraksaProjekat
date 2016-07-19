@@ -38,7 +38,7 @@ namespace OrderingFood.Data.Migrations
                 var a = new Administrator()
                 {
                     Restaurant=r1,
-                    AdministratorName="Dusan"
+                    AdministratorName="a.jerinic"
                 };
                 context.Administrators.AddOrUpdate(a);
 

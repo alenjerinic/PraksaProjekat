@@ -9,13 +9,14 @@ using OrderingFood.Data.Models;
 using System.Web.Routing;
 
 namespace OrderingFood.Web.Controllers
-{    
+{
+    
     public class RestaurantController : Controller
     {
-        private UnitOfWork _uow;        
+        private UnitOfWork _uow;
 
-        // GET: Restaurant
-        [Route("Restaurants")]
+        
+        // GET: Restaurant        
         public ActionResult Restaurants()
         {
             List<RestaurantModel> model = new List<RestaurantModel>();
