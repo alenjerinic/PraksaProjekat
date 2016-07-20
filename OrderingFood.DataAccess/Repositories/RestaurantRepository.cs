@@ -11,30 +11,18 @@ namespace OrderingFood.DataAccess.Repositories
         }
 
 
-        public Restaurant AddRestaurant(string name, string address, string tel, bool active)
+        public Restaurant AddRestaurant(Restaurant rest)
         {
             var restaurant = new Restaurant()
             {
-                RestaurantName = name,
-                Address = address,
-                Telephone = tel,
-                Active = active
+                RestaurantName =rest.RestaurantName,
+                Address = rest.Address,
+                Telephone = rest.Telephone,
+                Active = rest.Active
             };
             _context.Restaurants.Add(restaurant);
             _context.SaveChanges();
             return restaurant;
-        }
-
-
-        public void DeleteRestaurant(int id)
-        {
-            var restaurant = _context.Restaurants.Find(id);
-            if (restaurant == null)
-            {
-                throw new ArgumentException("Specified restaurant does not exist", nameof(id));
-            }
-            restaurant = null;
-            _context.SaveChanges();
-        }
+        }               
     }
 }

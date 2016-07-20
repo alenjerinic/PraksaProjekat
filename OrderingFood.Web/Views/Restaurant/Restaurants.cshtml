@@ -17,7 +17,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Telephone)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>        
     </tr>
 
 @foreach (var item in Model) {
@@ -31,10 +33,20 @@
         <td>
             @Html.DisplayFor(modelItem => item.Telephone)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
         <td>           
-            @Html.ActionLink("Meals", "Meals", new { id=item.ID })          
+            @Html.ActionLink("Menu|", "Meals", new { id=item.ID })
+            @Html.ActionLink("|Delete Restaurant|", "Delete", new { id = item.ID })
+            @Html.ActionLink("|Edit Restaurant", "Edit", new { id = item.ID })
+                      
         </td>
     </tr>
 }
 
 </table>
+
+<ul class="nav navbar-nav navbar-right">
+    <li>@Html.ActionLink("Add new Restaurant", "CreateRestaurant", "Restaurant", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>       
+</ul>

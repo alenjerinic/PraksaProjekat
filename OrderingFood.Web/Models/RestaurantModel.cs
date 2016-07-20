@@ -19,5 +19,9 @@ namespace OrderingFood.Web.Models
 
         [DisplayName("Restaurant Telephone")]
         public string Telephone { get; set; }
+
+        [DisplayName("Restaurant Active")]
+        public bool Active { get; set; }
+
     }
 }

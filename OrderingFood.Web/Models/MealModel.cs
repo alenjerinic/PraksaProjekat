@@ -14,12 +14,15 @@ namespace OrderingFood.Web.Models
         [DisplayName("Meal Name")]       
         public string MealName { get; set; }
 
-        [DisplayName("Categori Name")]
+        [DisplayName("Category Name")]
         public string CategoryName { get; set; }
 
         [DisplayName("Price")]
         public double Price { get; set; }
-        
+
+        [DisplayName("Active")]
+        public bool Active { get; set; }
+
     }
 }
 

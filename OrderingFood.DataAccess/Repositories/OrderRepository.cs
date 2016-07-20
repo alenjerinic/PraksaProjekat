@@ -35,41 +35,5 @@ namespace OrderingFood.DataAccess.Repositories
             _context.SaveChanges();
             return order;            
         } 
-
-
-        public void DeleteOrder(int id)
-        {
-            var order = _context.Orders.Find(id);
-            if (order == null)
-            {
-                throw new ArgumentException("Specified order does not exist", nameof(id));
-            }
-
-            if (order.OrderTime > 12)
-            {
-                throw new InvalidOperationException("Order can not be deleted, order time expired");
-            }
-            order.Amount = 0;
-            order.Meal = null;
-            _context.SaveChanges();
-        }
-
-
-        public void UpdateOrder(int id, int amaunt, DateTime time, bool delivery, Meal meal)
-        {
-            var order = _context.Orders.Find(id);
-            if (order == null)
-            {
-                throw new ArgumentException("Specified order does not exist", nameof(id));
-            }
-
-            order.Amount = amaunt;
-            order.OrderTime = time.Hour;
-            order.Delivery = delivery;
-            order.Meal = meal;
-            _context.SaveChanges();
-
-        }
-
     }
 }

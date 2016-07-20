@@ -42,3 +42,6 @@
         @Html.ActionLink("Back to Restaurants", "Restaurants")        
     </p>
 </div>
+<ul class="nav navbar-nav navbar-right">
+    <li>@Html.ActionLink("Add new Meal", "CreateMeal", "Restaurant", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+</ul>

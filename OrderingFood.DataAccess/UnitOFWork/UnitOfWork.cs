@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderingFood.DataAccess.UnitOFWork
+namespace OrderingFood.DataAccess.UnitOfWork
 {   
         public class UnitOfWork : IDisposable
         {

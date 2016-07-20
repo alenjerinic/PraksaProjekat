@@ -21,18 +21,6 @@ namespace OrderingFood.DataAccess.Repositories
             _context.Administrators.Add(admin);
             _context.SaveChanges();
             return admin;
-        }
-
-
-        public void DeleteAdministrator(int id)
-        {
-            var admin = _context.Administrators.Find(id);
-            if (admin == null)
-            {
-                throw new ArgumentException("Specified admin does not exist", nameof(id));
-            }
-            admin.Restaurant = null;           
-            _context.SaveChanges();
-        }
+        }    
     }
 }

@@ -22,33 +22,19 @@ namespace OrderingFood.DataAccess.Repositories
         }
 
 
-        public Meal AddMeal(string name, string category, double price, bool active, Restaurant restaurant)
+        public Meal AddMeal(Meal obrok)
         {
             var meal = new Meal()
             {
-                MealName = name,
-                CategoryName = category,
-                Price = price,
-                Active = active,
-                Orders = null,
-                Restaurant = restaurant
+                MealName = obrok.MealName,
+                CategoryName = obrok.CategoryName,
+                Price = obrok.Price,
+                Active = obrok.Active,
+                //RestaurantID = obrok.RestaurantID
             };
             _context.Meals.Add(meal);
             _context.SaveChanges();
             return meal;
-        }
-
-
-        public void DeleteMeal(int id)
-        {
-            var meal = _context.Meals.Find(id);
-            if (meal == null)
-            {
-                throw new ArgumentException("Specified meal does not exist", nameof(id));
-            }
-            meal = null;
-            _context.SaveChanges();
-
-        }
+        }       
     }
 }
