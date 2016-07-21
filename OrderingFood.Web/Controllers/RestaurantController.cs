@@ -7,6 +7,7 @@ using OrderingFood.DataAccess.UnitOfWork;
 using OrderingFood.Data.Context;
 using OrderingFood.Data.Models;
 using System.Web.Routing;
+using System.Linq;
 
 namespace OrderingFood.Web.Controllers
 {
@@ -42,30 +43,53 @@ namespace OrderingFood.Web.Controllers
 
         // GET: Restaurant/Meals/1
         [Route("Restaurant/Restaurants/id:int")]
-        public ActionResult Meals(int? ID)
+        public ActionResult Meals(int? id)
         {
-            if (ID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List<DetailsModel> model = new List<DetailsModel>();
+            DetailsModel model = new DetailsModel();
+            model.restoran = new RestaurantModel();
+            model.mealsForRestaurant = new List<Meal>();
 
             using (_uow = new UnitOfWork(new OrderingContext()))
             {
-                var restaurant = _uow.RestaurantRepository.GetByID((int)ID);
+                var restaurant = _uow.RestaurantRepository.GetByID((int)id);
+                
+                model.restoran.ID = restaurant.ID;
+                model.restoran.RestaurantName = restaurant.RestaurantName;
+                model.restoran.Address = restaurant.Address;
+                model.restoran.Telephone = restaurant.Telephone;
+                model.restoran.Active = restaurant.Active;
+
                 var meal = _uow.MealRepository.GetMealByRestaurant(restaurant.ID);
 
-                foreach (var item in meal)
-                {
-                    DetailsModel detail = new DetailsModel()
-                    {
-                        ID = item.ID,
-                        MealName = item.MealName,
-                        Price = item.Price,
-                        Category = item.CategoryName
-                    };
-                    model.Add(detail);
-                }
+                meal.Select(m => new Meal()
+                {                    
+                    Active=m.Active,
+                    ID=m.ID,
+                    MealName=m.MealName,
+                    CategoryName=m.CategoryName,
+                    Price=m.Price                    
+                });
+
+                model.mealsForRestaurant = meal;
+
+
+
+                //foreach (var item in meal)
+                //{
+                //    var _mealforDetail = new Meal();
+                //    _mealforDetail.ID = item.ID;
+                //    _mealforDetail.MealName = item.MealName;
+                //    _mealforDetail.CategoryName = item.CategoryName;
+                //    _mealforDetail.Price = item.Price;
+                //    _mealforDetail.Active = item.Active;
+                //    model.mealsForRestaurant.Add(_mealforDetail);
+                //};
+
+
             }
             return View(model);
         }
@@ -105,9 +129,9 @@ namespace OrderingFood.Web.Controllers
         }
 
 
-        public ActionResult DeleteRestaurant(int? ID)
+        public ActionResult DeleteRestaurant(int? id)
         {
-            if (ID == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -116,7 +140,7 @@ namespace OrderingFood.Web.Controllers
 
             using (_uow = new UnitOfWork(new OrderingContext()))
             {
-                restaurant = _uow.RestaurantRepository.GetByID((int)ID);
+                restaurant = _uow.RestaurantRepository.GetByID((int)id);
                 restaurantToDelete.Address = restaurant.Address;
                 restaurantToDelete.RestaurantName = restaurant.RestaurantName;
                 restaurantToDelete.Telephone = restaurant.Telephone;
@@ -157,7 +181,7 @@ namespace OrderingFood.Web.Controllers
             RestaurantModel restaurantModel = new RestaurantModel();
 
             using (_uow = new UnitOfWork(new OrderingContext()))
-            {               
+            {
 
                 var restaurant = new Restaurant();
 
@@ -208,8 +232,11 @@ namespace OrderingFood.Web.Controllers
         }
 
 
+
+
         // GET: Restaurant/id/Meal/Create
-        public ActionResult CreateMeal()
+        [Route("Restaurants/id:int/CreateMeal")]
+        public ActionResult CreateMeal(int? id)
         {
             return View();
         }
@@ -217,21 +244,21 @@ namespace OrderingFood.Web.Controllers
         // POST: Restaurant/Meal/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Route("Restaurant/int:id/Meals")]
+        [Route("Restaurants/int:id/CreateMeal")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateMeal([Bind(Include = "MealName,CategoryName,Price")] Meal mealModel,int? id)
-        {            
+        public ActionResult CreateMeal([Bind(Include = "MealName,CategoryName,Price")] Meal mealModel, int? id)
+        {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }           
+            }
 
             using (_uow = new UnitOfWork(new OrderingContext()))
             {
-                var restaurant = _uow.RestaurantRepository.GetByID((int)id);        
+                var restaurant = _uow.RestaurantRepository.GetByID((int)id);
 
-                var meal= new Meal();
+                var meal = new Meal();
                 {
                     meal.MealName = mealModel.MealName;
                     meal.CategoryName = mealModel.CategoryName;
@@ -244,7 +271,7 @@ namespace OrderingFood.Web.Controllers
                 {
                     _uow.MealRepository.AddMeal(meal);
                     _uow.MealRepository.Save();
-                    return RedirectToAction("Meals");
+                    return RedirectToAction("Meals", restaurant);
                 }
             }
             return View(mealModel);
@@ -253,3 +280,58 @@ namespace OrderingFood.Web.Controllers
     }
 }
 
+
+
+
+
+/*
+ * 
+ * 
+ * 
+ * 
+ *
+ *  [Route("Restaurants/int:id/CreateMeal")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateMeal([Bind(Include = "MealName,CategoryName,Price")] DetailsModel model, int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            model.restoran = new RestaurantModel();
+            model.mealsForRestaurant = new List<Meal>();
+
+
+            using (_uow = new UnitOfWork(new OrderingContext()))
+            {
+                var restaurant = _uow.RestaurantRepository.GetByID((int)id);
+
+                var meal = new Meal();
+
+                foreach (var item in model.mealsForRestaurant)
+                {
+                    meal.ID = item.ID;
+                    meal.MealName = item.MealName;
+                    meal.CategoryName = item.CategoryName;
+                    meal.Price = item.Price;
+                    meal.Active = item.Active;
+                    meal.RestaurantID = model.restoran.ID;
+                };               
+
+                if (ModelState.IsValid)
+                {
+                    _uow.MealRepository.AddMeal(meal);
+                    _uow.MealRepository.Save();
+                    return RedirectToAction("Meals");
+                }
+            }
+            return View(mealModel);
+        } 
+ * 
+ * 
+ * 
+ * 
+ *
+ */

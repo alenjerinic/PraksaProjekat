@@ -20,10 +20,11 @@ namespace OrderingFood.Web
             );
 
             routes.MapRoute(
-                name: "Jelo",
-                url: "{controller}/{id}/{action}",
-                defaults: new { controller = "Restaurant", id = UrlParameter.Optional , action = "CreateMeal" }
-            );
+               name: "Jelo",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Restaurant", action = "Restaurants", id = UrlParameter.Optional }
+           );
+
         }
     }
 }

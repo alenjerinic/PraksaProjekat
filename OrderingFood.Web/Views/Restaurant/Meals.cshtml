@@ -1,4 +1,5 @@
-﻿@model IEnumerable<OrderingFood.Web.Models.DetailsModel>
+﻿@model OrderingFood.Web.Models.DetailsModel
+ 
 
 @{
     ViewBag.Title = "Meals";
@@ -11,25 +12,25 @@
     <tr>
        
         <th>
-            @Html.DisplayNameFor(model => model.MealName)
+            @Html.DisplayNameFor(model => model.mealsForRestaurant.FirstOrDefault().MealName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.DisplayNameFor(model => model.mealsForRestaurant.FirstOrDefault().CategoryName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.mealsForRestaurant.FirstOrDefault().Price)
         </th>
         <th></th>
         </tr>
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.mealsForRestaurant)
         {
             <tr>                
                 <td>
                     @Html.DisplayFor(modelItem => item.MealName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Category)
+                    @Html.DisplayFor(modelItem => item.CategoryName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
@@ -43,5 +44,5 @@
     </p>
 </div>
 <ul class="nav navbar-nav navbar-right">
-    <li>@Html.ActionLink("Add new Meal", "CreateMeal", "Restaurant", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li>@Html.ActionLink("Add new Meal", "CreateMeal", "Restaurant", routeValues: new { Id=Model.restoran.ID}, htmlAttributes: new {})</li>
 </ul>

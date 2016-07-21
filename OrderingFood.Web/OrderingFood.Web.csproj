@@ -246,8 +246,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Restaurant\CreateRestaurant.cshtml" />
-    <Content Include="Views\Restaurant\Delete.cshtml" />
-    <Content Include="Views\Restaurant\Edit.cshtml" />
+    <Content Include="Views\Restaurant\DeleteRestaurant.cshtml" />
+    <Content Include="Views\Restaurant\EditRestaurant.cshtml" />
     <Content Include="Views\Restaurant\Meals.cshtml" />
     <Content Include="Views\Restaurant\Restaurants.cshtml" />
     <Content Include="Views\Restaurant\CreateMeal.cshtml" />

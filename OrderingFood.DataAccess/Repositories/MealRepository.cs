@@ -30,7 +30,7 @@ namespace OrderingFood.DataAccess.Repositories
                 CategoryName = obrok.CategoryName,
                 Price = obrok.Price,
                 Active = obrok.Active,
-                //RestaurantID = obrok.RestaurantID
+                Restaurant = _context.Restaurants.Find(obrok.RestaurantID)
             };
             _context.Meals.Add(meal);
             _context.SaveChanges();
