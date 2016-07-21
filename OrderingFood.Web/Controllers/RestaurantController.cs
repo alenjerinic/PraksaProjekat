@@ -120,7 +120,7 @@ namespace OrderingFood.Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    _uow.RestaurantRepository.AddRestaurant(restaurant);
+                    _uow.RestaurantRepository.Insert(restaurant);
                     _uow.RestaurantRepository.Save();
                     return RedirectToAction("Restaurants");
                 }
@@ -269,7 +269,7 @@ namespace OrderingFood.Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    _uow.MealRepository.AddMeal(meal);
+                    _uow.MealRepository.Insert(meal);
                     _uow.MealRepository.Save();
                     return RedirectToAction("Meals", restaurant);
                 }

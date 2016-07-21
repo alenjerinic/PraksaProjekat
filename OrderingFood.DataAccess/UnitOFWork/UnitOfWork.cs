@@ -10,7 +10,8 @@ namespace OrderingFood.DataAccess.UnitOfWork
 {   
         public class UnitOfWork : IDisposable
         {
-            private IOrderingContext _context = null;
+
+        private IOrderingContext _context = null;
         private AdministratorRepository _administratorRepository;
         private RestaurantRepository _restaurantRepository;
         private MealRepository _mealRepository;

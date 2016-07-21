@@ -1,5 +1,7 @@
-﻿using OrderingFood.Data.Models;
+﻿using System.Collections.Generic;
 using OrderingFood.Data.Context;
+using OrderingFood.Data.Models;
+using System.Linq;
 using System;
 
 namespace OrderingFood.DataAccess.Repositories
@@ -10,17 +12,14 @@ namespace OrderingFood.DataAccess.Repositories
         {
         }
 
+        //public List<Administrator> GetAdministratorsByRestaurant(int id)
+        //{
+        //    var result = (from admins in _context.Administrators
+        //                  from restaurants in _context.Restaurants
+        //                  where restaurants.ID == admins.RestaurantID && restaurants.ID == id
+        //                  select admins).ToList();
+        //    return result;
 
-        public Administrator AddAdministrator(string name, Restaurant restaurant)
-        {
-            var admin = new Administrator()
-            {
-               AdministratorName=name,
-               Restaurant = restaurant
-            };
-            _context.Administrators.Add(admin);
-            _context.SaveChanges();
-            return admin;
-        }    
+        //}
     }
 }

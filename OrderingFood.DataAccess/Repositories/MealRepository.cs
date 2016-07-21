@@ -12,29 +12,13 @@ namespace OrderingFood.DataAccess.Repositories
         {
         }
 
-        public List<Meal> GetMealByRestaurant(int id)
-        {
-            var result = (from meals in _context.Meals
-                          from restaurants in _context.Restaurants
-                          where restaurants.ID == meals.RestaurantID && restaurants.ID==id
-                          select meals).ToList();
-            return result;
-        }
-
-
-        public Meal AddMeal(Meal obrok)
-        {
-            var meal = new Meal()
-            {
-                MealName = obrok.MealName,
-                CategoryName = obrok.CategoryName,
-                Price = obrok.Price,
-                Active = obrok.Active,
-                Restaurant = _context.Restaurants.Find(obrok.RestaurantID)
-            };
-            _context.Meals.Add(meal);
-            _context.SaveChanges();
-            return meal;
-        }       
+        //public List<Meal> GetMealByRestaurant(int id)
+        //{
+        //    var result = (from meals in _context.Meals
+        //                  from restaurants in _context.Restaurants
+        //                  where restaurants.ID == meals.RestaurantID && restaurants.ID==id
+        //                  select meals).ToList();
+        //    return result;
+        //}       
     }
 }
