@@ -9,5 +9,21 @@ namespace OrderingFood.DataAccess.Repositories
         public RestaurantRepository(IOrderingContext context) : base(context)
         {
         }
+
+
+
+        public void AddRestaurant(Restaurant rest)
+        {
+            var restaurant = new Restaurant()
+            {
+               
+                RestaurantName = rest.RestaurantName,
+                Address = rest.Address,
+                Telephone = rest.Telephone,
+                Active = rest.Active
+            };
+            _context.Restaurants.Add(restaurant);
+            _context.SaveChanges();            
+            }
     }
 }

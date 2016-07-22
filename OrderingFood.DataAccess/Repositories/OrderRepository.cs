@@ -12,13 +12,30 @@ namespace OrderingFood.DataAccess.Repositories
         {
         }
 
-        //public List<Order> GetOrderByMeal(string name)
-        //{
-        //    var result = (from orders in _context.Orders
-        //                  from meals in _context.Meals
-        //                  where meals.ID == orders.MealID && meals.MealName == name
-        //                  select orders).ToList();
-        //    return result;
-        //}       
+        public List<Order> GetOrderByMeal(int id)
+        {
+            var result = (from orders in _context.Orders
+                          from meals in _context.Meals
+                          where meals.ID == orders.MealID && meals.ID == id
+                          select orders).ToList();
+            return result;
+        }
+
+
+        public void AddOrder(Order narudzba)
+        {
+            var order = new Order()
+            {
+                ID=narudzba.ID,
+                Amount=narudzba.Amount,
+                OrderTime=narudzba.OrderTime,
+                Delivery=narudzba.Delivery,
+                MealID=narudzba.MealID
+            };
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+        }
+
+
     }
 }

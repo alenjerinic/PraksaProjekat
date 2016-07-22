@@ -81,31 +81,8 @@ namespace OrderingFood.DataAccess.Repositories
             _dbSet.Remove(entity);
         }
 
-        public List<Administrator> GetAdministratorsByRestaurant(int id)
-        {
-            var result = (from admins in _context.Administrators
-                          from restaurants in _context.Restaurants
-                          where restaurants.ID == admins.RestaurantID && restaurants.ID == id
-                          select admins).ToList();
-            return result;
-        }
+        
 
-        public List<Meal> GetMealByRestaurant(int id)
-        {
-            var result = (from meals in _context.Meals
-                          from restaurants in _context.Restaurants
-                          where restaurants.ID == meals.RestaurantID && restaurants.ID == id
-                          select meals).ToList();
-            return result;
-        }
-
-        public List<Order> GetOrderByMeal(string name)
-        {
-            var result = (from orders in _context.Orders
-                          from meals in _context.Meals
-                          where meals.ID == orders.MealID && meals.MealName == name
-                          select orders).ToList();
-            return result;
-        }
+       
     }
 }

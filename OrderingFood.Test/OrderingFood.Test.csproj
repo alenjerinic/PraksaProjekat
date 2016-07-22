@@ -72,8 +72,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AdministratorRepositoryTest.cs" />
+    <Compile Include="MealRepositoryTest.cs" />
     <Compile Include="MockDBContext.cs" />
+    <Compile Include="OrderRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResaurantRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OrderingFood.DataAccess\OrderingFood.DataAccess.csproj">

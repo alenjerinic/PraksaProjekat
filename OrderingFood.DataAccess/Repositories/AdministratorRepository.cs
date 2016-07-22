@@ -12,14 +12,25 @@ namespace OrderingFood.DataAccess.Repositories
         {
         }
 
-        //public List<Administrator> GetAdministratorsByRestaurant(int id)
-        //{
-        //    var result = (from admins in _context.Administrators
-        //                  from restaurants in _context.Restaurants
-        //                  where restaurants.ID == admins.RestaurantID && restaurants.ID == id
-        //                  select admins).ToList();
-        //    return result;
+        public List<Administrator> GetAdministratorsByRestaurant(int id)
+        {
+            var result = (from admins in _context.Administrators
+                          from restaurants in _context.Restaurants
+                          where restaurants.ID == admins.RestaurantID && restaurants.ID == id
+                          select admins).ToList();
+            return result;
+        }
 
-        //}
+
+        public void AddAdministrator(Administrator admin)
+        {
+            var administrator = new Administrator()
+            {
+                AdministratorName = admin.AdministratorName,                
+                RestaurantID = admin.RestaurantID
+            };
+            _context.Administrators.Add(administrator);
+            _context.SaveChanges();
+        }
     }
 }

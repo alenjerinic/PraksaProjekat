@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using OrderingFood.Data.Models;
-using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OrderingFood.DataAccess.Repositories;
 using OrderingFood.Data.Context;
-using Moq;
+using OrderingFood.Data.Models;
 using System.Data.Entity;
+using System.Linq;
+using System;
+using Moq;
+
 
 namespace OrderingFood.Test
 {
@@ -100,10 +98,10 @@ namespace OrderingFood.Test
             var moqOrder = new Mock<DbSet<Order>>();
             var orders = mockOrders.AsQueryable();
 
-            moqMeal.As<IQueryable<Order>>().Setup(o => o.Provider).Returns(meals.Provider);
-            moqMeal.As<IQueryable<Order>>().Setup(o => o.Expression).Returns(meals.Expression);
-            moqMeal.As<IQueryable<Order>>().Setup(o => o.ElementType).Returns(meals.ElementType);
-            moqMeal.As<IQueryable<Order>>().Setup(o => o.GetEnumerator()).Returns(() => {
+            moqOrder.As<IQueryable<Order>>().Setup(o => o.Provider).Returns(meals.Provider);
+            moqOrder.As<IQueryable<Order>>().Setup(o => o.Expression).Returns(meals.Expression);
+            moqOrder.As<IQueryable<Order>>().Setup(o => o.ElementType).Returns(meals.ElementType);
+            moqOrder.As<IQueryable<Order>>().Setup(o => o.GetEnumerator()).Returns(() => {
                 var it = orders.GetEnumerator();
                 it.Reset();
                 return it;
@@ -116,10 +114,10 @@ namespace OrderingFood.Test
             var moqRestaurant = new Mock<DbSet<Restaurant>>();
             var restaurants = mockRestaurants.AsQueryable();
 
-            moqMeal.As<IQueryable<Restaurant>>().Setup(r => r.Provider).Returns(meals.Provider);
-            moqMeal.As<IQueryable<Restaurant>>().Setup(r => r.Expression).Returns(meals.Expression);
-            moqMeal.As<IQueryable<Restaurant>>().Setup(r => r.ElementType).Returns(meals.ElementType);
-            moqMeal.As<IQueryable<Restaurant>>().Setup(r => r.GetEnumerator()).Returns(() => {
+            moqRestaurant.As<IQueryable<Restaurant>>().Setup(r => r.Provider).Returns(meals.Provider);
+            moqRestaurant.As<IQueryable<Restaurant>>().Setup(r => r.Expression).Returns(meals.Expression);
+            moqRestaurant.As<IQueryable<Restaurant>>().Setup(r => r.ElementType).Returns(meals.ElementType);
+            moqRestaurant.As<IQueryable<Restaurant>>().Setup(r => r.GetEnumerator()).Returns(() => {
                 var it = restaurants.GetEnumerator();
                 it.Reset();
                 return it;
