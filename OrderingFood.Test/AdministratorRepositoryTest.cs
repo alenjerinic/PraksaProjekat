@@ -13,33 +13,10 @@ namespace OrderingFood.Test
         [TestMethod]
         public void GetAdministratorByRestaurant()
         {
-            var admins = new List<Administrator>();
-            admins.Add(new Administrator()
-            {
-                ID = 1,
-                AdministratorName="Asad",
-                RestaurantID=1
-
-            });
-
-            admins.Add(new Administrator()
-            {
-                ID = 2,
-                AdministratorName = "Sadam",
-                RestaurantID = 1
-
-            });
-
-            admins.Add(new Administrator()
-            {
-                ID = 3,
-                AdministratorName = "Milun",
-                RestaurantID = 2
-
-            });
-
             var restaurants = new List<Restaurant>();
-            restaurants.Add(new Restaurant()
+            var admins = new List<Administrator>();
+
+            var rest1 = new Restaurant()
             {
                 ID = 1,
                 RestaurantName = "Kafana",
@@ -48,9 +25,10 @@ namespace OrderingFood.Test
                 Active = false,
                 Administrators = admins,
                 Meals = null
-            });
+            };
+            restaurants.Add(rest1);
 
-            restaurants.Add(new Restaurant()
+            var rest2 = new Restaurant()
             {
                 ID = 2,
                 RestaurantName = "Kafanica",
@@ -59,9 +37,36 @@ namespace OrderingFood.Test
                 Active = true,
                 Administrators = admins,
                 Meals = null
-            });
+            };
+            restaurants.Add(rest1);
 
 
+            var admin1=new Administrator()
+            {
+                ID = 1,
+                AdministratorName="Asad",
+                Restaurant=rest1,
+                RestaurantID=rest1.ID
+            };
+            admins.Add(admin1);
+
+            var admin2 = new Administrator()
+            {
+                ID = 2,
+                AdministratorName = "Sadam",
+                Restaurant = rest1,
+                RestaurantID = rest1.ID
+            };
+            admins.Add(admin2);
+
+            var admin3 = new Administrator()
+            {
+                ID = 3,
+                AdministratorName = "Milun",
+                Restaurant = rest2,
+                RestaurantID = rest2.ID
+            };
+            admins.Add(admin3);
 
             var mockContext = new MockDBContext().WithBuitinRestaurants(restaurants).WithBuitinAdministrators(admins).Create();
 
@@ -74,80 +79,105 @@ namespace OrderingFood.Test
         }
         #endregion
 
+
+
         #region adding-new-admins-to-restaurant
         [TestMethod]
         public void AddAdministratorsToRestaurant()
         {
-
-            var admins = new List<Administrator>();
-            admins.Add(new Administrator()
-            {
-                ID = 1,
-                AdministratorName = "Asad",
-                RestaurantID = 1
-
-            });
-
-            admins.Add(new Administrator()
-            {
-                ID = 2,
-                AdministratorName = "Sadam",
-                RestaurantID = 1
-
-            });
-
-            admins.Add(new Administrator()
-            {
-                ID = 3,
-                AdministratorName = "Milun",
-                RestaurantID = 2
-
-            });
-
+            int id = 2;
             var restaurants = new List<Restaurant>();
-            restaurants.Add(new Restaurant()
+            var admins = new List<Administrator>();
+            var admins1 = new List<Administrator>();
+            var admins2 = new List<Administrator>();
+            var admini = new List<Administrator>();
+
+            var rest1 = new Restaurant()
             {
                 ID = 1,
                 RestaurantName = "Kafana",
                 Address = "Trosna bb",
                 Telephone = "+38123555666",
                 Active = false,
-                Administrators = admins,
+                Administrators = admins1,
                 Meals = null
-            });
+            };
+            restaurants.Add(rest1);
 
-            restaurants.Add(new Restaurant()
+            var rest2 = new Restaurant()
             {
                 ID = 2,
                 RestaurantName = "Kafanica",
                 Address = "sabanova",
                 Telephone = "+38123444666",
                 Active = true,
-                Administrators = admins,
+                Administrators = admins2,
                 Meals = null
-            });
+            };
+            restaurants.Add(rest2);
 
-            var admini = new Administrator()
+
+            var admin1 = new Administrator()
+            {
+                ID = 1,
+                AdministratorName = "Asad",
+                Restaurant = rest1,
+                RestaurantID=rest1.ID
+            };
+            admins.Add(admin1);
+            admins1.Add(admin1);
+
+            var admin2 = new Administrator()
+            {
+                ID = 2,
+                AdministratorName = "Sadam",
+                Restaurant = rest2,
+                RestaurantID=rest2.ID
+            };
+            admins.Add(admin2);
+            admins2.Add(admin2);
+
+            var admin3 = new Administrator()
+            {
+                ID = 3,
+                AdministratorName = "Milun",
+                Restaurant=rest2,
+                RestaurantID=rest2.ID
+            };
+            admins.Add(admin3);
+            admins2.Add(admin3);
+
+
+            var admin4 = new Administrator()
             {
                 ID = 4,
-                AdministratorName = "Zivadinka",
-                RestaurantID = 1
-
+                AdministratorName = "Zivadinka"
             };
-
 
 
             var mockContext = new MockDBContext().WithBuitinRestaurants(restaurants).WithBuitinAdministrators(admins).Create();
 
             var repository = new UnitOfWork(mockContext);
 
-            repository.AdministratorRepository.AddAdministrator(admini);
+            repository.AdministratorRepository.AddAdministrator(admin4,rest2);
 
-            var admincic = repository.AdministratorRepository.GetAdministratorsByRestaurant(1);
+            if (id == 1)
+            {
+                admini = repository.AdministratorRepository.GetAdministratorsByRestaurant(id);
+                admins1 = admini;
 
-            Assert.AreEqual(4, admins.Count);
-            Assert.AreEqual(3, admincic.Count);
+                Assert.AreEqual(4, admins.Count);
+                Assert.AreEqual(3, admins1.Count);
+            }
 
+            else
+            {
+                admini = repository.AdministratorRepository.GetAdministratorsByRestaurant(id);
+                admins2 = admini;
+
+                Assert.AreEqual(4, admins.Count);
+                Assert.AreEqual(3, admins2.Count);
+            }
 
         }
         #endregion

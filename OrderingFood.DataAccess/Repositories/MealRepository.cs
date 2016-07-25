@@ -13,24 +13,25 @@ namespace OrderingFood.DataAccess.Repositories
         }
 
 
+        //public List<Meal> GetMealByRestaurant(int id)
+        //{
+        //    var result = (from meals in _context.Meals
+        //                  from restaurants in _context.Restaurants
+        //                  where restaurants.ID == meals.RestaurantID && restaurants.ID == id
+        //                  select meals).ToList();
+        //    return result;
+        //}
+
         public List<Meal> GetMealByRestaurant(int id)
         {
-            var result = (from meals in _context.Meals
-                          from restaurants in _context.Restaurants
-                          where restaurants.ID == meals.RestaurantID && restaurants.ID == id
-                          select meals).ToList();
-            return result;
-        }
 
-        public List<Meal> get(int id)
-        {
-            var result = _context.Meals.Where(m => m.Restaurant.ID == id).ToList();
+            var result = new List<Meal>();
+            result = _context.Meals.Where(m => m.Restaurant.ID == id).ToList();
             return result;
         }
 
 
-
-        public void AddMeal(Meal obrok)
+        public void AddMeal(Meal obrok,Restaurant rest)
         {
             var meal = new Meal()
             {
@@ -39,7 +40,8 @@ namespace OrderingFood.DataAccess.Repositories
                 CategoryName = obrok.CategoryName,
                 Price = obrok.Price,
                 Active = obrok.Active,
-                RestaurantID = obrok.RestaurantID                
+                Restaurant = _context.Restaurants.Find(rest.ID),
+                RestaurantID=rest.ID                
             };
             _context.Meals.Add(meal);
             _context.SaveChanges();                      

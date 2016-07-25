@@ -23,7 +23,7 @@ namespace OrderingFood.Web.Controllers
             List<RestaurantModel> model = new List<RestaurantModel>();
             using (_uow = new UnitOfWork(new OrderingContext()))
             {
-                var data = _uow.RestaurantRepository.Get(null, null, null);
+                var data = _uow.RestaurantRepository.Get(null, null, null);                             
 
                 foreach (var item in data)
                 {
@@ -75,8 +75,6 @@ namespace OrderingFood.Web.Controllers
                 });
 
                 model.mealsForRestaurant = meal;
-
-
 
                 //foreach (var item in meal)
                 //{
@@ -263,13 +261,12 @@ namespace OrderingFood.Web.Controllers
                     meal.MealName = mealModel.MealName;
                     meal.CategoryName = mealModel.CategoryName;
                     meal.Price = mealModel.Price;
-                    meal.Active = mealModel.Active;
-                    meal.RestaurantID = restaurant.ID;
+                    meal.Active = mealModel.Active;                    
                 }
 
                 if (ModelState.IsValid)
                 {
-                    _uow.MealRepository.Insert(meal);
+                    _uow.MealRepository.AddMeal(meal,restaurant);
                     _uow.MealRepository.Save();
                     return RedirectToAction("Meals", restaurant);
                 }

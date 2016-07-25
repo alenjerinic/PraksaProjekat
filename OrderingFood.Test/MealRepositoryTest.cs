@@ -13,51 +13,22 @@ namespace OrderingFood.Test
         [TestMethod]
         public void GetMealByRestaurant()
         {
-            var melas = new List<Meal>();
-            melas.Add(new Meal()
-            {
-                ID = 1,
-                MealName = "Index",
-                CategoryName = "Sendvic",
-                Price = 200.00,
-                RestaurantID = 2,
-                Active = true
-
-            });
-
-            melas.Add(new Meal()
-            {
-                ID = 5,
-                MealName = "Index Mali",
-                CategoryName = "Sendvic",
-                Price = 150.00,
-                RestaurantID = 2,
-                Active = true
-            });
-
-            melas.Add(new Meal()
-            {
-                ID = 2,
-                MealName = "Index Mali",
-                CategoryName = "Sendvic",
-                Price = 150.00,
-                RestaurantID = 1,
-                Active = true
-            });
-
             var restaurants = new List<Restaurant>();
-            restaurants.Add(new Restaurant()
+            var melas = new List<Meal>();
+
+            var rest1 = new Restaurant()
             {
                 ID = 1,
-                RestaurantName="Kafana",
-                Address="Trosna bb",
-                Telephone="+38123555666",
-                Active=false,
-                Administrators=null,
-                Meals=melas
-            });
+                RestaurantName = "Kafana",
+                Address = "Trosna bb",
+                Telephone = "+38123555666",
+                Active = false,
+                Administrators = null,
+                Meals = melas
+            };
+            restaurants.Add(rest1);
 
-            restaurants.Add(new Restaurant()
+            var rest2 = new Restaurant()
             {
                 ID = 2,
                 RestaurantName = "Kafanica",
@@ -65,10 +36,46 @@ namespace OrderingFood.Test
                 Telephone = "+38123444666",
                 Active = true,
                 Administrators = null,
-                Meals=melas                
-            });
+                Meals = melas
+            };
+            restaurants.Add(rest2);
 
-           
+            var obr1 = new Meal()
+            {
+                ID = 1,
+                MealName = "Index",
+                CategoryName = "Sendvic",
+                Price = 200.00,
+                Restaurant = rest1,
+                RestaurantID = rest1.ID,
+                Active = true
+            };
+            melas.Add(obr1);
+
+            var obr2 = new Meal()
+            {
+                ID = 2,
+                MealName = "Index Mali",
+                CategoryName = "Sendvic",
+                Price = 150.00,
+                Restaurant = rest2,
+                RestaurantID = rest2.ID,
+                Active = true
+            };
+            melas.Add(obr2);
+            
+            var obr3 = new Meal()
+            {
+                ID = 3,
+                MealName = "Index Mali",
+                CategoryName = "Sendvic",
+                Price = 150.00,
+                Restaurant = rest2,
+                RestaurantID = rest2.ID,
+                Active = true
+            };
+            melas.Add(obr3);           
+
 
             var mockContext = new MockDBContext().WithBuitinRestaurants(restaurants).WithBuitinMeals(melas).Create();
 
@@ -85,40 +92,14 @@ namespace OrderingFood.Test
         [TestMethod]
         public void AddMealToRestaurants()
         {
+            int id = 2;
             var melas = new List<Meal>();
-            melas.Add(new Meal()
-            {
-                ID = 1,
-                MealName = "Index",
-                CategoryName = "Sendvic",
-                Price = 200.00,
-                RestaurantID = 2,
-                Active = true
-
-            });
-
-            melas.Add(new Meal()
-            {
-                ID = 5,
-                MealName = "Index Mali",
-                CategoryName = "Sendvic",
-                Price = 150.00,
-                RestaurantID = 2,
-                Active = true
-            });
-
-            melas.Add(new Meal()
-            {
-                ID = 2,
-                MealName = "Index Mali",
-                CategoryName = "Sendvic",
-                Price = 150.00,
-                RestaurantID = 1,
-                Active = true
-            });
-
+            var melas1 = new List<Meal>();
+            var melas2 = new List<Meal>();
             var restaurants = new List<Restaurant>();
-            restaurants.Add(new Restaurant()
+            var mil = new List<Meal>();
+
+            var rest1 = new Restaurant()
             {
                 ID = 1,
                 RestaurantName = "Kafana",
@@ -126,10 +107,11 @@ namespace OrderingFood.Test
                 Telephone = "+38123555666",
                 Active = false,
                 Administrators = null,
-                Meals = melas
-            });
+                Meals = melas1          
+            };
+            restaurants.Add(rest1);
 
-            restaurants.Add(new Restaurant()
+            var rest2 = new Restaurant()
             {
                 ID = 2,
                 RestaurantName = "Kafanica",
@@ -137,29 +119,81 @@ namespace OrderingFood.Test
                 Telephone = "+38123444666",
                 Active = true,
                 Administrators = null,
-                Meals = melas
-            });
+                Meals = melas2
+            };
+            restaurants.Add(rest2);
 
-            var obrok = new Meal();
+            var obr1 = new Meal()
             {
-                obrok.ID = 10;
-                obrok.MealName = "Capricoza";
-                obrok.CategoryName = "Pizza";
-                obrok.Price = 400.00;
-                obrok.Active = true;
-                obrok.RestaurantID = 1;
+                ID = 1,
+                MealName = "Index",
+                CategoryName = "Sendvic",
+                Price = 200.00,
+                Restaurant = rest1,
+                RestaurantID=rest1.ID,
+                Active = true
+            };
+            melas.Add(obr1);
+            melas1.Add(obr1);
+
+
+            var obr2 = new Meal()
+            {
+                ID = 2,
+                MealName = "Index Mali",
+                CategoryName = "Sendvic",
+                Price = 150.00,
+                Restaurant=rest2,
+                RestaurantID = rest2.ID,
+                Active = true
+            };
+            melas.Add(obr2);
+            melas2.Add(obr1);
+
+            var obr3 = new Meal()
+            {
+                ID = 3,
+                MealName = "Index Mali",
+                CategoryName = "Sendvic",
+                Price = 150.00,
+                Restaurant=rest2,
+                RestaurantID = rest2.ID,
+                Active = true
+            };
+            melas.Add(obr3);
+            melas2.Add(obr1);
+
+            var obr4 = new Meal();
+            {
+                obr4.ID = 4;
+                obr4.MealName = "Capricoza";
+                obr4.CategoryName = "Pizza";
+                obr4.Price = 400.00;
+                obr4.Active = true;                               
             }
 
             var mockContext = new MockDBContext().WithBuitinRestaurants(restaurants).WithBuitinMeals(melas).Create();
 
             var repository = new UnitOfWork(mockContext);
 
-            repository.MealRepository.AddMeal(obrok);
+            repository.MealRepository.AddMeal(obr4,rest2);
 
-            var mil = repository.MealRepository.GetMealByRestaurant(1);
+            if (id == 1)
+            {
+                mil = repository.MealRepository.GetMealByRestaurant(id);
+                melas1 = mil;
+                
+                Assert.AreEqual(4, melas.Count);
+                Assert.AreEqual(1, melas1.Count);
+            }
 
-            Assert.AreEqual(4, melas.Count);
-            Assert.AreEqual(2, mil.Count);
+            else
+            {
+                mil = repository.MealRepository.GetMealByRestaurant(id);
+                melas2 = mil;
+                Assert.AreEqual(4, melas.Count);
+                Assert.AreEqual(3, melas2.Count);
+            }
 
 
         }

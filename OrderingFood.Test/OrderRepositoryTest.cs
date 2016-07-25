@@ -13,60 +13,12 @@ namespace OrderingFood.Test
         [TestMethod]
         public void GetOrderByMeal()
         {
-            var orders = new List<Order>();
-            orders.Add(new Order()
-            {
-                ID=1,
-                Amount=1,
-                OrderTime=11,
-                Delivery=true,
-                MealID=1
-            });
-
-            orders.Add(new Order()
-            {
-                ID = 2,
-                Amount = 1,
-                OrderTime = 11,
-                Delivery = true,
-                MealID = 2
-            });
-
-            orders.Add(new Order()
-            {
-                ID = 3,
-                Amount = 1,
-                OrderTime = 11,
-                Delivery = true,
-                MealID = 2
-            });
-
-            var melas = new List<Meal>();
-            melas.Add(new Meal()
-            {
-                ID = 1,
-                MealName = "Index",
-                CategoryName = "Sendvic",
-                Price = 200.00,
-                RestaurantID = 1,
-                Active = true,                
-                Orders=orders              
-
-            });
-
-            melas.Add(new Meal()
-            {
-                ID = 2,
-                MealName = "Index Mali",
-                CategoryName = "Sendvic",
-                Price = 150.00,
-                RestaurantID = 1,
-                Active = true,
-                Orders = orders
-            });
 
             var restaurants = new List<Restaurant>();
-            restaurants.Add(new Restaurant()
+            var melas = new List<Meal>();
+            var orders = new List<Order>();
+
+            var rest = new Restaurant()
             {
                 ID = 1,
                 RestaurantName = "Kafana",
@@ -75,15 +27,74 @@ namespace OrderingFood.Test
                 Active = false,
                 Administrators = null,
                 Meals = melas
-            });
+            };
+            restaurants.Add(rest);
+
+            var mel1 = new Meal()
+            {
+                ID = 1,
+                MealName = "Index",
+                CategoryName = "Sendvic",
+                Price = 200.00,
+                Restaurant = null,
+                Active = true,
+                Orders = orders
+            };
+            melas.Add(mel1);
+
+            var mel2 = new Meal()
+            {
+                ID = 2,
+                MealName = "Index Mali",
+                CategoryName = "Sendvic",
+                Price = 150.00,
+                Restaurant = null,
+                Active = true,
+                Orders = orders
+            };
+            melas.Add(mel2);
+
+            var ord1 = new Order()
+            {
+                ID = 1,
+                Amount = 1,
+                OrderTime = 11,
+                Delivery = true,
+                Meal = mel1,
+                MealID=mel1.ID
+            };
+            orders.Add(ord1);
+
+            var ord2 = new Order()
+            {
+                ID = 2,
+                Amount = 1,
+                OrderTime = 11,
+                Delivery = true,
+                Meal = mel1,
+                MealID = mel1.ID
+            };
+            orders.Add(ord2);
+
+            var ord3 = new Order()
+            {
+                ID = 3,
+                Amount = 1,
+                OrderTime = 11,
+                Delivery = true,
+                Meal = mel2,
+                MealID = mel2.ID
+            };
+            orders.Add(ord3);
+
 
             var mockContext = new MockDBContext().WithBuitinRestaurants(restaurants).WithBuitinMeals(melas).WithBuitinOrders(orders).Create();           
 
-            var repository = new UnitOfWork(mockContext);            
+            var repository = new UnitOfWork(mockContext);           
 
             var ord = repository.OrderRepository.GetOrderByMeal(1);
 
-            Assert.AreEqual(1, ord.Count);
+            Assert.AreEqual(2, ord.Count);
 
         }
         #endregion
@@ -92,58 +103,14 @@ namespace OrderingFood.Test
         [TestMethod]
         public void AddOrdersToMeals()
         {
-            var orders = new List<Order>();
-            orders.Add(new Order()
-            {
-                ID = 1,
-                Amount = 1,
-                OrderTime = 11,
-                Delivery = true,
-                MealID = 1
-            });
-
-            orders.Add(new Order()
-            {
-                ID = 2,
-                Amount = 1,
-                OrderTime = 11,
-                Delivery = true,
-                MealID = 2
-            });
-
-            orders.Add(new Order()
-            {
-                ID = 3,
-                Amount = 1,
-                OrderTime = 11,
-                Delivery = true,
-                MealID = 2
-            });
-
-            var melas = new List<Meal>();
-            melas.Add(new Meal()
-            {
-                ID = 1,
-                MealName = "Index",
-                CategoryName = "Sendvic",
-                Price = 200.00,
-                RestaurantID = 1,
-                Active = true
-
-            });
-
-            melas.Add(new Meal()
-            {
-                ID = 2,
-                MealName = "Index Mali",
-                CategoryName = "Sendvic",
-                Price = 150.00,
-                RestaurantID = 2,
-                Active = true
-            });            
-
+            int id = 2;
             var restaurants = new List<Restaurant>();
-            restaurants.Add(new Restaurant()
+            var melas = new List<Meal>();
+            var orders = new List<Order>();
+            var orders1 = new List<Order>();
+            var orders2 = new List<Order>();
+
+            var rest = new Restaurant()
             {
                 ID = 1,
                 RestaurantName = "Kafana",
@@ -152,39 +119,104 @@ namespace OrderingFood.Test
                 Active = false,
                 Administrators = null,
                 Meals = melas
-            });
+            };
+            restaurants.Add(rest);
 
-            restaurants.Add(new Restaurant()
+            var mel1 = new Meal()
+            {
+                ID = 1,
+                MealName = "Index",
+                CategoryName = "Sendvic",
+                Price = 200.00,
+                Restaurant = rest,
+                RestaurantID=rest.ID,
+                Active = true,
+                Orders = orders1
+            };
+            melas.Add(mel1);
+
+            var mel2 = new Meal()
             {
                 ID = 2,
-                RestaurantName = "Kafanica",
-                Address = "sabanova",
-                Telephone = "+38123444666",
+                MealName = "Index Mali",
+                CategoryName = "Sendvic",
+                Price = 150.00,
+                Restaurant = rest,
+                RestaurantID = rest.ID,
                 Active = true,
-                Administrators = null,
-                Meals = melas
-            });
+                Orders = orders2
+            };
+            melas.Add(mel2);
 
-            var ord = new Order();
+            var ord1 = new Order()
             {
-                ord.ID = 8;
-                ord.MealID = 2;
-                ord.Amount = 1;
-                ord.OrderTime = 10;
-                ord.Delivery = true;
+                ID = 1,
+                Amount = 1,
+                OrderTime = 11,
+                Delivery = true,
+                Meal = mel1,
+                MealID = mel1.ID
+            };
+            orders.Add(ord1);
+            orders1.Add(ord1);
 
-            }
+            var ord2 = new Order()
+            {
+                ID = 2,
+                Amount = 1,
+                OrderTime = 11,
+                Delivery = true,
+                Meal = mel2,
+                MealID = mel2.ID
+            };
+            orders.Add(ord2);
+            orders2.Add(ord2);
+
+            var ord3 = new Order()
+            {
+                ID = 3,
+                Amount = 1,
+                OrderTime = 11,
+                Delivery = true,
+                Meal = mel2,
+                MealID = mel2.ID
+            };
+            orders.Add(ord3);
+            orders2.Add(ord3);
+
+            var ord4 = new Order()
+            {
+                ID = 8,                
+                Amount = 1,
+                OrderTime = 10,
+                Delivery = true
+            };
 
             var mockContext = new MockDBContext().WithBuitinRestaurants(restaurants).WithBuitinMeals(melas).WithBuitinOrders(orders).Create();
 
             var repository = new UnitOfWork(mockContext);
 
-            repository.OrderRepository.AddOrder(ord);
+            var ord = repository.OrderRepository.GetOrderByMeal(2);
 
-            var ordercic = repository.OrderRepository.GetOrderByMeal(2);
+            repository.OrderRepository.AddOrder(ord4, mel2);
 
-            Assert.AreEqual(4, orders.Count);
-            Assert.AreEqual(3, ordercic.Count);
+            if (id == 1)
+            {
+                ord = repository.OrderRepository.GetOrderByMeal(id);
+                orders1 = ord;
+
+                Assert.AreEqual(4, orders.Count);
+                Assert.AreEqual(1, orders1.Count);
+            }
+
+            else
+            {
+                ord = repository.OrderRepository.GetOrderByMeal(id);
+                orders2 = ord;
+                Assert.AreEqual(4, orders.Count);
+                Assert.AreEqual(3, orders2.Count);
+            }
+           
 
 
         }

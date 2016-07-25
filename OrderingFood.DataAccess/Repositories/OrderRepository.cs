@@ -12,17 +12,26 @@ namespace OrderingFood.DataAccess.Repositories
         {
         }
 
-        public List<Order> GetOrderByMeal(int id)
+        //public List<Order> GetOrderByMeal(int id)
+        //{
+        //    var result = (from orders in _context.Orders
+        //                  from meals in _context.Meals
+        //                  where meals.ID == orders.MealID && meals.ID == id
+        //                  select orders).ToList();
+        //    return result;
+        //}
+
+        public List<Order> GetOrderByMeal(int idO)
         {
-            var result = (from orders in _context.Orders
-                          from meals in _context.Meals
-                          where meals.ID == orders.MealID && meals.ID == id
-                          select orders).ToList();
-            return result;
+            
+
+            var resO = new List<Order>();
+            resO = _context.Orders.Where(o => o.Meal.ID == idO).ToList();
+            return resO;
         }
 
 
-        public void AddOrder(Order narudzba)
+        public void AddOrder(Order narudzba, Meal obrok)
         {
             var order = new Order()
             {
@@ -30,7 +39,8 @@ namespace OrderingFood.DataAccess.Repositories
                 Amount=narudzba.Amount,
                 OrderTime=narudzba.OrderTime,
                 Delivery=narudzba.Delivery,
-                MealID=narudzba.MealID
+                Meal=_context.Meals.Find(obrok.ID),
+                MealID=obrok.ID
             };
             _context.Orders.Add(order);
             _context.SaveChanges();
