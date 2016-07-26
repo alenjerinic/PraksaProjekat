@@ -1,5 +1,5 @@
-﻿@model OrderingFood.Web.Models.DetailsModel
- 
+﻿@model OrderingFood.Web.Models.MealDetailsModel
+
 
 @{
     ViewBag.Title = "Meals";
@@ -8,24 +8,24 @@
 <h2>Meals</h2>
 
 <div>
-        <table class="table">
-    <tr>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.mealsForRestaurant.FirstOrDefault().MealName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mealsForRestaurant.FirstOrDefault().CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mealsForRestaurant.FirstOrDefault().Price)
-        </th>
-        <th></th>
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.mealsForRestaurant.FirstOrDefault().MealName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mealsForRestaurant.FirstOrDefault().CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mealsForRestaurant.FirstOrDefault().Price)
+            </th>
+            <th></th>
         </tr>
 
         @foreach (var item in Model.mealsForRestaurant)
         {
-            <tr>                
+            <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.MealName)
                 </td>
@@ -34,15 +34,21 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
-                </td>               
+                </td>
+                <td>
+                    @Html.ActionLink("Order|", "Orders", new { id = item.ID })
+                    @Html.ActionLink("|Edit Meal|", "EditMeal", new { id = item.ID })
+                    @Html.ActionLink("|Delete Meal", "DeleteMeal", new { id = item.ID })
+                </td>
             </tr>
         }
-        </table>
-
-    <p>
-        @Html.ActionLink("Back to Restaurants", "Restaurants")        
-    </p>
+    </table>
 </div>
+
+<ul class="nav navbar-nav navbar-left">
+    <li>@Html.ActionLink("Back to Restaurants", "Restaurants")</li>
+</ul>
+
 <ul class="nav navbar-nav navbar-right">
-    <li>@Html.ActionLink("Add new Meal", "CreateMeal", "Restaurant", routeValues: new { Id=Model.restoran.ID}, htmlAttributes: new {})</li>
+    <li>@Html.ActionLink("Add new Meal", "CreateMeal", "Restaurant", routeValues: new { Id = Model.restoran.ID }, htmlAttributes: new { })</li>
 </ul>

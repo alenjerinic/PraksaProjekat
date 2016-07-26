@@ -19,5 +19,7 @@ namespace OrderingFood.Web.Models
 
         [DisplayName("Delivery")]
         public bool Delivery { get; set; }
+
+        public int MealID { get; set; }
     }
 }

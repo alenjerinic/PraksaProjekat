@@ -10,17 +10,7 @@ namespace OrderingFood.DataAccess.Repositories
     {
         public MealRepository(IOrderingContext context) : base(context)
         {
-        }
-
-
-        //public List<Meal> GetMealByRestaurant(int id)
-        //{
-        //    var result = (from meals in _context.Meals
-        //                  from restaurants in _context.Restaurants
-        //                  where restaurants.ID == meals.RestaurantID && restaurants.ID == id
-        //                  select meals).ToList();
-        //    return result;
-        //}
+        }       
 
         public List<Meal> GetMealByRestaurant(int id)
         {
@@ -46,7 +36,32 @@ namespace OrderingFood.DataAccess.Repositories
             _context.Meals.Add(meal);
             _context.SaveChanges();                      
         }
-     
+
+        public void UpdateMeal(Meal obrok, Restaurant rest)
+        {
+            var meal = new Meal()
+            {
+                ID = obrok.ID,
+                MealName = obrok.MealName,
+                CategoryName = obrok.CategoryName,
+                Price = obrok.Price,
+                Active = obrok.Active,
+                Restaurant = _context.Restaurants.Find(rest.ID),
+                RestaurantID = rest.ID
+            };
+            //_dbSet.Attach(meal);
+            var m = _context.Meals.Find(obrok.ID);
+
+            m.ID = meal.ID;
+            m.MealName = meal.MealName;
+            m.CategoryName = meal.CategoryName;
+            m.Price = meal.Price;
+            m.Active = meal.Active;
+            m.Restaurant = meal.Restaurant;
+            m.RestaurantID = meal.RestaurantID;
+
+            _context.SaveChanges();
+        }   
 
        
     }

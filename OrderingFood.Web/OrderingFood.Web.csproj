@@ -199,8 +199,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdministratorModel.cs" />
+    <Compile Include="Models\OrderDetailsModel.cs" />
     <Compile Include="Models\ProtectionModel.cs" />
-    <Compile Include="Models\DetailsModel.cs" />
+    <Compile Include="Models\MealDetailsModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MealModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
@@ -248,9 +249,12 @@
     <Content Include="Views\Restaurant\CreateRestaurant.cshtml" />
     <Content Include="Views\Restaurant\DeleteRestaurant.cshtml" />
     <Content Include="Views\Restaurant\EditRestaurant.cshtml" />
-    <Content Include="Views\Restaurant\Meals.cshtml" />
     <Content Include="Views\Restaurant\Restaurants.cshtml" />
     <Content Include="Views\Restaurant\CreateMeal.cshtml" />
+    <Content Include="Views\Restaurant\EditMeal.cshtml" />
+    <Content Include="Views\Restaurant\DeleteMeal.cshtml" />
+    <Content Include="Views\Restaurant\Meals.cshtml" />
+    <Content Include="Views\Restaurant\Orders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

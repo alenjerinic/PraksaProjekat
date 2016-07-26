@@ -23,6 +23,8 @@ namespace OrderingFood.Web.Models
         [DisplayName("Active")]
         public bool Active { get; set; }
 
+        public int RestaurantID { get; set; }
+
     }
 }
 
