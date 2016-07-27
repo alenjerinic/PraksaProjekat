@@ -51,9 +51,10 @@ namespace OrderingFood.Data.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
+                        UserName = c.String(),
                         Amount = c.Int(nullable: false),
                         MealID = c.Int(nullable: false),
-                        OrderTime = c.Int(nullable: false),
+                        OrderTime = c.DateTime(nullable: false),
                         Delivery = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)

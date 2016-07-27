@@ -11,11 +11,14 @@ namespace OrderingFood.Web.Models
         [DisplayName("Identification NUmber")]
         public int ID { get; set; }
 
+        [DisplayName("UserName")]
+        public string UserName { get; set; }
+
         [DisplayName("Amaunt")]
         public int Amount { get; set; }
 
-        [DisplayName("Time")]
-        public int OrderTime { get; set; }
+        [DisplayName("Time")]        
+        public DateTime OrderTime { get; set; }
 
         [DisplayName("Delivery")]
         public bool Delivery { get; set; }

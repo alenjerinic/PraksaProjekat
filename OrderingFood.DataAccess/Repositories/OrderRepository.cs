@@ -35,17 +35,18 @@ namespace OrderingFood.DataAccess.Repositories
         {
             var order = new Order()
             {
-                ID=narudzba.ID,
-                Amount=narudzba.Amount,
-                OrderTime=narudzba.OrderTime,
-                Delivery=narudzba.Delivery,
-                Meal=_context.Meals.Find(obrok.ID),
-                MealID=obrok.ID
+                ID = narudzba.ID,
+                UserName = narudzba.UserName,
+                Amount = narudzba.Amount,
+                OrderTime = narudzba.OrderTime,
+                Delivery = narudzba.Delivery,
+                Meal = _context.Meals.Find(obrok.ID),
+                MealID = obrok.ID
             };
+
             _context.Orders.Add(order);
             _context.SaveChanges();
+
         }
-
-
     }
 }

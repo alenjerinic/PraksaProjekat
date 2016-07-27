@@ -82,9 +82,10 @@ namespace OrderingFood.Data.Migrations
 
                 context.Orders.AddOrUpdate(new Order()
                 {
+                    UserName="Alen",
                     Meal =m,        
                     Amount = 1,
-                    OrderTime = DateTime.Now.Hour,
+                    OrderTime = DateTime.Now,
                     Delivery = false
                 });
             }

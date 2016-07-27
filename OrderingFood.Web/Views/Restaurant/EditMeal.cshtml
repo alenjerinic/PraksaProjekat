@@ -52,9 +52,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RestaurantID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.HiddenFor(model => model.RestaurantID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RestaurantID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.RestaurantID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.RestaurantID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -69,7 +69,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to list of Meals", "Meals", routeValues: new { Id=Model.RestaurantID})
+    @Html.ActionLink("Back to list of Meals", "Meals", routeValues: new { Id = Model.RestaurantID })
 </div>
 
 @section Scripts {

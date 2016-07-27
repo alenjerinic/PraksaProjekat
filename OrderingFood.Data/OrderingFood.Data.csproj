@@ -51,9 +51,9 @@
   <ItemGroup>
     <Compile Include="Context\IOrderingContext.cs" />
     <Compile Include="Context\OrderingContext.cs" />
-    <Compile Include="Migrations\201607150858192_Initial.cs" />
-    <Compile Include="Migrations\201607150858192_Initial.Designer.cs">
-      <DependentUpon>201607150858192_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201607271154315_Initial.cs" />
+    <Compile Include="Migrations\201607271154315_Initial.Designer.cs">
+      <DependentUpon>201607271154315_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Administrator.cs" />
@@ -69,8 +69,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607150858192_Initial.resx">
-      <DependentUpon>201607150858192_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607271154315_Initial.resx">
+      <DependentUpon>201607271154315_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

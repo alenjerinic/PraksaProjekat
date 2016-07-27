@@ -47,6 +47,13 @@
     <li>@Html.ActionLink("Back to Meals", "Meals",routeValues:new { Id = Model.restoran.ID })</li>
 </ul>
 
-<ul class="nav navbar-nav navbar-right">
-    @*<li>@Html.ActionLink("Add new Order", "CreateOrder", "Meal", routeValues: new { Id = Model.meal.RestaurantID }, htmlAttributes: new { })</li>*@
+<ul class="nav navbar-nav navbar-right">   
+    @if (DateTime.Now.Hour < 12)
+    {
+    <li>@Html.ActionLink("Add new Order", "CreateOrder", "Restaurant", routeValues: new { Id = Model.meal.ID }, htmlAttributes: new { })</li>
+    }
+    else
+    {
+        @Html.DisplayName("Ordering time has been expired")
+    }
 </ul>

@@ -2,6 +2,7 @@
 using OrderingFood.DataAccess.UnitOfWork;
 using System.Collections.Generic;
 using OrderingFood.Data.Models;
+using System;
 
 namespace OrderingFood.Test
 {
@@ -55,10 +56,11 @@ namespace OrderingFood.Test
             melas.Add(mel2);
 
             var ord1 = new Order()
-            {
+            {                
                 ID = 1,
+                UserName = "Alen",
                 Amount = 1,
-                OrderTime = 11,
+                OrderTime = DateTime.Now,
                 Delivery = true,
                 Meal = mel1,
                 MealID=mel1.ID
@@ -68,8 +70,9 @@ namespace OrderingFood.Test
             var ord2 = new Order()
             {
                 ID = 2,
+                UserName = "Milun",
                 Amount = 1,
-                OrderTime = 11,
+                OrderTime = DateTime.Now,
                 Delivery = true,
                 Meal = mel1,
                 MealID = mel1.ID
@@ -79,8 +82,9 @@ namespace OrderingFood.Test
             var ord3 = new Order()
             {
                 ID = 3,
+                UserName = "Nikola",
                 Amount = 1,
-                OrderTime = 11,
+                OrderTime = DateTime.Now,
                 Delivery = true,
                 Meal = mel2,
                 MealID = mel2.ID
@@ -151,8 +155,9 @@ namespace OrderingFood.Test
             var ord1 = new Order()
             {
                 ID = 1,
+                UserName = "Dzon",
                 Amount = 1,
-                OrderTime = 11,
+                OrderTime = DateTime.Now,
                 Delivery = true,
                 Meal = mel1,
                 MealID = mel1.ID
@@ -163,8 +168,9 @@ namespace OrderingFood.Test
             var ord2 = new Order()
             {
                 ID = 2,
+                UserName = "Vejn",
                 Amount = 1,
-                OrderTime = 11,
+                OrderTime = DateTime.Now,
                 Delivery = true,
                 Meal = mel2,
                 MealID = mel2.ID
@@ -175,8 +181,9 @@ namespace OrderingFood.Test
             var ord3 = new Order()
             {
                 ID = 3,
+                UserName = "Bruce",
                 Amount = 1,
-                OrderTime = 11,
+                OrderTime = DateTime.Now,
                 Delivery = true,
                 Meal = mel2,
                 MealID = mel2.ID
@@ -186,9 +193,10 @@ namespace OrderingFood.Test
 
             var ord4 = new Order()
             {
-                ID = 8,                
+                ID = 8,
+                UserName = "Lee",
                 Amount = 1,
-                OrderTime = 10,
+                OrderTime = DateTime.Now,
                 Delivery = true
             };
 

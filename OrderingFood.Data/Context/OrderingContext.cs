@@ -41,6 +41,7 @@ namespace OrderingFood.Data.Context
 
             modelBuilder.Entity<Order>().HasKey(o => o.ID);
             modelBuilder.Entity<Order>().Property(o => o.ID).HasColumnName("ID");
+            modelBuilder.Entity<Order>().Property(o => o.UserName).HasColumnName("UserName");
             modelBuilder.Entity<Order>().Property(o => o.Amount).HasColumnName("Amount");
             modelBuilder.Entity<Order>().Property(o => o.OrderTime).HasColumnName("OrderTime");
             modelBuilder.Entity<Order>().Property(o => o.Delivery).HasColumnName("Delivery");
