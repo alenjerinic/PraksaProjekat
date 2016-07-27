@@ -96,7 +96,7 @@ namespace OrderingFood.Test
 
             var repository = new UnitOfWork(mockContext);           
 
-            var ord = repository.OrderRepository.GetOrderByMeal(1);
+            var ord = repository.OrderRepository.GetOrdersByMeal(1);
 
             Assert.AreEqual(2, ord.Count);
 
@@ -204,13 +204,13 @@ namespace OrderingFood.Test
 
             var repository = new UnitOfWork(mockContext);
 
-            var ord = repository.OrderRepository.GetOrderByMeal(2);
+            var ord = repository.OrderRepository.GetOrdersByMeal(2);
 
             repository.OrderRepository.AddOrder(ord4, mel2);
 
             if (id == 1)
             {
-                ord = repository.OrderRepository.GetOrderByMeal(id);
+                ord = repository.OrderRepository.GetOrdersByMeal(id);
                 orders1 = ord;
 
                 Assert.AreEqual(4, orders.Count);
@@ -219,7 +219,7 @@ namespace OrderingFood.Test
 
             else
             {
-                ord = repository.OrderRepository.GetOrderByMeal(id);
+                ord = repository.OrderRepository.GetOrdersByMeal(id);
                 orders2 = ord;
                 Assert.AreEqual(4, orders.Count);
                 Assert.AreEqual(3, orders2.Count);

@@ -49,7 +49,7 @@ namespace OrderingFood.DataAccess.Repositories
                 Restaurant = _context.Restaurants.Find(rest.ID),
                 RestaurantID = rest.ID
             };
-            //_dbSet.Attach(meal);
+            
             var m = _context.Meals.Find(obrok.ID);
 
             m.ID = meal.ID;
