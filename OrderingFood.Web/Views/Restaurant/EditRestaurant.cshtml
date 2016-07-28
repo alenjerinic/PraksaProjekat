@@ -1,10 +1,10 @@
 ﻿@model OrderingFood.Web.Models.RestaurantModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "EditRestaurant";
 }
 
-<h2>Edit</h2>
+<h2>@Html.DisplayName(Model.RestaurantName)</h2>
 
 
 @using (Html.BeginForm())

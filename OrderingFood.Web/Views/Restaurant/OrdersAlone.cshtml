@@ -4,12 +4,15 @@
     ViewBag.Title = "Orders";
 }
 
-<h2>Orders</h2>
+<h2>@Html.DisplayName(Model.meal.MealName)</h2>
 
 <div>
     <table class="table">
         <tr>
 
+            <th>
+                @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().UserName)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().Amount)
             </th>
@@ -26,6 +29,9 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
@@ -35,8 +41,8 @@
                     @Html.DisplayFor(modelItem => item.Delivery)
                 </td>
                 <td>                    
-                    @*@Html.ActionLink("|Edit Order|", "EditOrder", new { id = item.ID })
-                    @Html.ActionLink("|Delete Order", "DeleteOrder", new { id = item.ID })*@
+                    @Html.ActionLink("|Edit Order|", "EditOrder", new { id = item.ID })
+                    @Html.ActionLink("|Delete Order", "DeleteOrder", new { id = item.ID })
                 </td>
             </tr>
         }
@@ -47,13 +53,14 @@
     <li>@Html.ActionLink("Back to Meals", "Meals",routeValues:new { Id = Model.restoran.ID })</li>
 </ul>
 
-<ul class="nav navbar-nav navbar-right">   
-    @if (DateTime.Now.Hour < 12)
+<ul class="nav navbar-nav navbar-right"> 
+    <li>@Html.ActionLink("Add new Order", "CreateOrder", "Restaurant", routeValues: new { Id = Model.meal.ID }, htmlAttributes: new { })</li>  
+    @*@if (DateTime.Now.Hour < 12)
     {
     <li>@Html.ActionLink("Add new Order", "CreateOrder", "Restaurant", routeValues: new { Id = Model.meal.ID }, htmlAttributes: new { })</li>
     }
     else
     {
         @Html.DisplayName("Ordering time has been expired")
-    }
+    }*@
 </ul>

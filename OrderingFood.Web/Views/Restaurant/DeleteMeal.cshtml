@@ -4,11 +4,10 @@
     ViewBag.Title = "Delete Meal";
 }
 
-<h2>DeleteMeal</h2>
+<h2>@Html.DisplayName(Model.RestaurantName)</h2>
 
 <h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>MealModel</h4>
+<div>  
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -43,13 +42,13 @@
             @Html.DisplayFor(model => model.Active)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.RestaurantID)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.RestaurantID)
-        </dd>
+        </dd>*@
 
     </dl>
 
@@ -58,7 +57,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to list of Meals", "Meals")
+            @Html.ActionLink("Back to list of Meals", "Meals", routeValues: new { Id = Model.RestaurantID })
         </div>
     }
 </div>

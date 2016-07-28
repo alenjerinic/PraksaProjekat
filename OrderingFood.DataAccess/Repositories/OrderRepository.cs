@@ -11,15 +11,7 @@ namespace OrderingFood.DataAccess.Repositories
         public OrderRepository(IOrderingContext context) : base(context)
         {
         }
-
-        //public List<Order> GetOrderByMeal(int id)
-        //{
-        //    var result = (from orders in _context.Orders
-        //                  from meals in _context.Meals
-        //                  where meals.ID == orders.MealID && meals.ID == id
-        //                  select orders).ToList();
-        //    return result;
-        //}
+      
 
         public List<Order> GetOrdersByMeal(int idO)
         {

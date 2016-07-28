@@ -4,7 +4,7 @@
     ViewBag.Title = "Create Meal";
 }
 
-<h2>CreateMeals</h2>
+<h2>@Html.DisplayName(Model.RestaurantName)</h2>
 
 
 @using (Html.BeginForm()) 
@@ -56,7 +56,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to Menu", "Meals")
+    @Html.ActionLink("Back to Menu", "Meals", routeValues:new { Id=Model.RestaurantID})
 </div>
 
 @section Scripts {

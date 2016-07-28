@@ -7,6 +7,6 @@ namespace OrderingFood.Web.Models
     {
         public RestaurantModel restoran { get; set; }
         public MealModel meal { get; set; }
-        public List<Order> ordersForMeal { get; set; }
+        public List<OrderModel> ordersForMeal { get; set; }
     }
 }
