@@ -46,43 +46,88 @@ namespace OrderingFood.Web.Controllers
         #region Getting list of Meals for Restaurant
         // GET: Restaurant/Meals/1
         [Route("Restaurant/Restaurants/id:int")]
-        public ActionResult Meals(int? id)
+        public ActionResult MealsAndOrders(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MealDetailsModel model = new MealDetailsModel();
-            model.restoran = new RestaurantModel();
-            model.mealsForRestaurant = new List<MealModel>();
+
+            AllOrdersForMeals all = new AllOrdersForMeals();           
+
+
+            MealDetailsModel modelm = new MealDetailsModel();
+            modelm.restoran = new RestaurantModel();
+            modelm.mealsForRestaurant = new List<MealModel>();
+
+            OrderDetailsModel modelo = new OrderDetailsModel();
+            modelo.restoran = new RestaurantModel();
+            modelo.meal = new MealModel();
+            modelo.ordersForMeal = new List<OrderModel>();
 
             using (_uow = new UnitOfWork(new OrderingContext()))
             {
                 var restaurant = _uow.RestaurantRepository.GetByID((int)id);
 
-                model.restoran.ID = restaurant.ID;
-                model.restoran.RestaurantName = restaurant.RestaurantName;
-                model.restoran.Address = restaurant.Address;
-                model.restoran.Telephone = restaurant.Telephone;
-                model.restoran.Active = restaurant.Active;
+                modelm.restoran.ID = restaurant.ID;
+                modelm.restoran.RestaurantName = restaurant.RestaurantName;
+                modelm.restoran.Address = restaurant.Address;
+                modelm.restoran.Telephone = restaurant.Telephone;
+                modelm.restoran.Active = restaurant.Active;
 
-                var meal = _uow.MealRepository.GetMealByRestaurant(restaurant.ID);
+                var mealm = _uow.MealRepository.GetMealByRestaurant(restaurant.ID);
 
-                foreach (var item in meal)
+                foreach (var item in mealm)
                 {
-                    MealModel mod = new MealModel()
+                    MealModel modm = new MealModel()
                     {
-                        Active=item.Active,
-                        CategoryName=item.CategoryName,
-                        ID=item.ID,
-                        MealName=item.MealName,
-                        Price=item.Price,
-                        RestaurantID=item.RestaurantID
+                        Active = item.Active,
+                        CategoryName = item.CategoryName,
+                        ID = item.ID,
+                        MealName = item.MealName,
+                        Price = item.Price,
+                        RestaurantID = item.RestaurantID
                     };
-                    model.mealsForRestaurant.Add(mod);
-                } 
+                    modelm.mealsForRestaurant.Add(modm);
+
+
+                    var meal = _uow.MealRepository.GetByID(modm.ID);
+
+                    modelo.meal.ID = meal.ID;
+                    modelo.meal.MealName = meal.MealName;
+                    modelo.meal.CategoryName = meal.CategoryName;
+                    modelo.meal.Price = meal.Price;
+                    modelo.meal.Active = meal.Active;
+
+                    var rest = _uow.RestaurantRepository.GetByID(meal.RestaurantID);
+                    modelo.restoran.ID = rest.ID;
+                    modelo.restoran.RestaurantName = rest.RestaurantName;
+                    modelo.restoran.Address = rest.Address;
+                    modelo.restoran.Telephone = rest.Telephone;
+                    modelo.restoran.Active = rest.Active;
+
+                    var orders = _uow.OrderRepository.GetOrdersByMeal(meal.ID);
+
+                    foreach (var itemo in orders)
+                    {
+                        OrderModel modo = new OrderModel()
+                        {
+                            ID = item.ID,
+                            UserName = itemo.UserName,
+                            Amount = itemo.Amount,
+                            OrderTime = itemo.OrderTime,
+                            Delivery = itemo.Delivery,
+                            MealID = itemo.MealID
+                        };
+                        modelo.ordersForMeal.Add(modo);
+                    }
+                }
             }
-            return View(model);
+
+            all.MealDetail = modelm;
+            all.OrderDetail = modelo;
+
+            return View(all);
         }
         #endregion
 

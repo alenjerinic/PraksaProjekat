@@ -259,7 +259,7 @@
     <Content Include="Views\Restaurant\CreateOrder.cshtml" />
     <Content Include="Views\Restaurant\EditOrder.cshtml" />
     <Content Include="Views\Restaurant\DeleteOrder.cshtml" />
-    <Content Include="Views\Restaurant\Meals.cshtml" />
+    <Content Include="Views\Restaurant\MealsAndOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
