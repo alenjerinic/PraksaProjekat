@@ -1,0 +1,72 @@
+﻿@model OrderingFood.Web.Models.OrderDetailsModel
+
+@{
+    ViewBag.Title = "OrdersAlone";
+}
+
+<h2>@Html.DisplayName(Model.meal.MealName)</h2>
+
+<div>
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().MealName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().OrderTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().Delivery)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.ordersForMeal)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MealName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Delivery)
+                </td>
+                <td>                    
+                    @Html.ActionLink("|Edit Order|", "EditOrder", new { id = item.ID })
+                    @Html.ActionLink("|Delete Order", "DeleteOrder", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<ul class="nav navbar-nav navbar-left">
+    <li>@Html.ActionLink("Back to Meals", "MealsAndOrders",routeValues:new { Id = Model.restoran.ID })</li>
+</ul>
+
+<ul class="nav navbar-nav navbar-right"> 
+    <li>@Html.ActionLink("Add new Order", "CreateOrder", "Restaurant", routeValues: new { Id = Model.meal.ID }, htmlAttributes: new { })</li>  
+    @*@if (DateTime.Now.Hour < 12)
+    {
+    <li>@Html.ActionLink("Add new Order", "CreateOrder", "Restaurant", routeValues: new { Id = Model.meal.ID }, htmlAttributes: new { })</li>
+    }
+    else
+    {
+        @Html.DisplayName("Ordering time has been expired")
+    }*@
+</ul>

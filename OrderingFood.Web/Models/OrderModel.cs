@@ -23,8 +23,17 @@ namespace OrderingFood.Web.Models
         [DisplayName("Delivery")]
         public bool Delivery { get; set; }
 
-        public string MealName { get;set; }
+        public MealModel Meal { get; set; }
 
-        public int MealID { get; set; }
+        public OrderModel()
+        {
+            Meal = new MealModel();
+        }
+
+        //public string MealName { get;set; }
+
+        //public int MealID { get; set; }
+
+        //public int RestaurantID { get; set; }
     }
 }

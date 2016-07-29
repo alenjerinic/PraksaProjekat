@@ -22,8 +22,13 @@ namespace OrderingFood.Web
             routes.MapRoute(
                name: "Jelo",
                url: "{controller}/{action}/{id}",
-               defaults: new { controller = "Restaurant", action = "Restaurants", id = UrlParameter.Optional }
+               defaults: new { controller = "Restaurant", action = "UserRestaurants", id = UrlParameter.Optional }
            );
+
+
+
+            //routes.MapRoute("home", "", new { controller = "Account", action = "Login" });
+            //routes.MapMvcAttributeRoutes();
 
         }
     }

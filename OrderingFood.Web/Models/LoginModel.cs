@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace OrderingFood.Web.Models
 {
-    using System.ComponentModel.DataAnnotations;
-
-    public class LoginModel:AdministratorModel
+    public class LoginModel
     {
         [Required]
         [Display(Name = "User name")]
@@ -21,5 +16,7 @@ namespace OrderingFood.Web.Models
         [Required]
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        public AdministratorModel Admin { get; set; }
     }
 }

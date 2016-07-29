@@ -1,0 +1,63 @@
+﻿@model OrderingFood.Web.Models.OrderModel
+
+@{
+    ViewBag.Title = "DeleteOrder";
+}
+
+<h2>@Html.DisplayName(Model.MealName)</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Delivery)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Delivery)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.MealID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MealID)
+        </dd>*@
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to list of Orders", "OrdersAlone", routeValues: new { Id = Model.MealID })
+        </div>
+    }
+</div>

@@ -1,0 +1,54 @@
+﻿@model OrderingFood.Web.Models.MealDetailsModel
+
+
+@{
+    ViewBag.Title = "UserMealsAlone";
+}
+
+<h2>@Html.DisplayName(Model.restoran.RestaurantName)</h2>
+
+<div>
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.mealsForRestaurant.FirstOrDefault().MealName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mealsForRestaurant.FirstOrDefault().CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mealsForRestaurant.FirstOrDefault().Price)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.mealsForRestaurant)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MealName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.ActionLink("Add new Order", "UserCreateOrder", new { id = item.ID})                    
+                  
+        @*@if (DateTime.Now.Hour < 12)
+        {
+        @Html.ActionLink("Add new Order", "UserCreateOrder", new { id = item.ID})
+        }
+        else
+        {
+            @Html.DisplayName("Ordering time has been expired")
+        }*@
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

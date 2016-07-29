@@ -14,5 +14,7 @@ namespace OrderingFood.Web.Models
         [DisplayName("Administrator Name")]
         public string AdministratorName { get; set; }
 
+        public int RestaurantID { get; set; }
+
     }
 }

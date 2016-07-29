@@ -8,6 +8,7 @@ public class AccountController : Controller
 {
     //private UnitOfWork _uow;
 
+        //[Route("")]
     public ActionResult Login()
     {
         return this.View();
@@ -30,7 +31,14 @@ public class AccountController : Controller
                 return this.Redirect(returnUrl);
             }
 
-            return this.RedirectToAction("Restaurants", "Restaurant");
+            if (model.Admin.AdministratorName == model.UserName)
+            {
+                return this.RedirectToAction("AdminRestaurants", "Restaurant");
+            }
+            else
+            {
+                return this.RedirectToAction("UserRestaurants", "Restaurant");
+            }
         }
 
         this.ModelState.AddModelError(string.Empty, "The user name or password provided is incorrect.");

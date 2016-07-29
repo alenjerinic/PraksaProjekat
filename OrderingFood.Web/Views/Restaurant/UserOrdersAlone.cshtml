@@ -1,10 +1,10 @@
 ﻿@model OrderingFood.Web.Models.OrderDetailsModel
 
 @{
-    ViewBag.Title = "Orders";
+    ViewBag.Title = "UserOrdersAlone";
 }
 
-<h2>@Html.DisplayName(Model.meal.MealName)</h2>
+<h2>@Html.DisplayName(Model.restoran.RestaurantName+"Orders")</h2>
 
 <div>
     <table class="table">
@@ -12,6 +12,9 @@
 
             <th>
                 @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().Meal.MealName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().Amount)
@@ -32,6 +35,9 @@
                     @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Meal.MealName)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
@@ -41,26 +47,11 @@
                     @Html.DisplayFor(modelItem => item.Delivery)
                 </td>
                 <td>                    
-                    @Html.ActionLink("|Edit Order|", "EditOrder", new { id = item.ID })
-                    @Html.ActionLink("|Delete Order", "DeleteOrder", new { id = item.ID })
+                    @Html.ActionLink("|Edit Order|", "UserEditOrder", new { id = item.ID })
+                    @Html.ActionLink("|Delete Order", "UserDeleteOrder", new { id = item.ID })
                 </td>
             </tr>
         }
     </table>
 </div>
 
-<ul class="nav navbar-nav navbar-left">
-    <li>@Html.ActionLink("Back to Meals", "Meals",routeValues:new { Id = Model.restoran.ID })</li>
-</ul>
-
-<ul class="nav navbar-nav navbar-right"> 
-    <li>@Html.ActionLink("Add new Order", "CreateOrder", "Restaurant", routeValues: new { Id = Model.meal.ID }, htmlAttributes: new { })</li>  
-    @*@if (DateTime.Now.Hour < 12)
-    {
-    <li>@Html.ActionLink("Add new Order", "CreateOrder", "Restaurant", routeValues: new { Id = Model.meal.ID }, htmlAttributes: new { })</li>
-    }
-    else
-    {
-        @Html.DisplayName("Ordering time has been expired")
-    }*@
-</ul>

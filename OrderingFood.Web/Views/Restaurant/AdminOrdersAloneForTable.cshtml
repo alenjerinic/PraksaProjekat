@@ -1,0 +1,57 @@
+﻿@model OrderingFood.Web.Models.OrderDetailsModel
+
+@{
+    ViewBag.Title = "AdminOrdersAlone";
+}
+
+<h2>@Html.DisplayName(Model.meal.MealName)</h2>
+
+<div>
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().MealName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().OrderTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ordersForMeal.FirstOrDefault().Delivery)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.ordersForMeal)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MealName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Delivery)
+                </td>
+                <td>                    
+                    @Html.ActionLink("|Edit Order|", "EditOrder", new { id = item.ID })
+                    @Html.ActionLink("|Delete Order", "DeleteOrder", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

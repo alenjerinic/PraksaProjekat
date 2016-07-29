@@ -1,0 +1,23 @@
+﻿@model OrderingFood.Web.Models.AllOrdersForMeals
+
+@{
+    ViewBag.Title = "AllOrdersForMeals";
+}
+
+
+@Html.Partial("UserMealsAlone", Model.MealDetail)
+
+
+
+
+
+
+@Html.Partial("UserOrdersAlone",Model.OrderDetail)
+
+
+
+<ul class="nav navbar-nav navbar-left">
+    <li>@Html.ActionLink("Back to Restaurants", "Restaurants", routeValues: new { Id = Model.MealDetail.restoran.ID })</li>
+</ul>
+
+  

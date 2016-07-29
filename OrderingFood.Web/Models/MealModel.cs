@@ -23,9 +23,16 @@ namespace OrderingFood.Web.Models
         [DisplayName("Active")]
         public bool Active { get; set; }
 
-        public string RestaurantName { get; set; }
+        public RestaurantModel Restaurant { get; set; }
 
-        public int RestaurantID { get; set; }
+        public MealModel()
+        {
+            Restaurant = new RestaurantModel();
+        }
+
+        //public string RestaurantName { get; set; }
+
+        //public int RestaurantID { get; set; }
 
     }
 }

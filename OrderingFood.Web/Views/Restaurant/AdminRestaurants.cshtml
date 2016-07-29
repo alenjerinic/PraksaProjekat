@@ -38,6 +38,8 @@
         </td>
         <td>           
             @Html.ActionLink("Menu|", "MealsAndOrders", new { id=item.ID })
+
+            @Html.ActionLink("|Meals|", "MealsAlone", new { id = item.ID })
             @Html.ActionLink("|Delete Restaurant|", "DeleteRestaurant", new { id = item.ID })
             @Html.ActionLink("|Edit Restaurant", "EditRestaurant", new { id = item.ID })
                       
